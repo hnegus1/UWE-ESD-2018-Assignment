@@ -11,8 +11,12 @@ and open the template in the editor.
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>
-        <h1>This is the index page, so this will be the first page that the user will see!</h1>
-        
-        <p>If possible, this should redirect to the first servlet</p>
+        <%
+            String redirectURL = "http://localhost:8080/UWE-ESD-2018-Assignment-war/Login";
+            response.sendRedirect(redirectURL);
+        %>
     </body>
 </html>
+
+
+
