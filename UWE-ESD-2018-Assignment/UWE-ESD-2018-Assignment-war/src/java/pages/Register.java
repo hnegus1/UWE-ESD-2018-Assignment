@@ -1,25 +1,17 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package com;
+package pages;
 
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import com.Config;
 
 /**
  *
- * @author Harry
+ * @author Tom Pugh
  */
-public class ServletExample extends HttpServlet {
+public class Register extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -32,23 +24,18 @@ public class ServletExample extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        Config config = (Config) getServletContext().getAttribute("config");
+//        response.setContentType("text/html;charset=UTF-8");
+//        Config config = (Config) getServletContext().getAttribute("config");
         
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet Servlet</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet Servlet at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }
-        
-        
+        String [] query = new String[4];
+        query[0] = (String)request.getParameter("NAME");
+        query[1] = (String)request.getParameter("EMAIL");
+        query[2] = (String)request.getParameter("PASSWORD");
+        query[3] = (String)request.getParameter("PHONE");
+//        String str = String.format("INSERT INTO CUSTOMER(NAME, EMAIL, PHONE) "
+//                + "VALUES (%s,%s,%s)", query[0], query[1], query[3]);
+//        s
+//        config.executeUpdate(str);  
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -77,7 +64,7 @@ public class ServletExample extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+         processRequest(request, response);
     }
 
     /**

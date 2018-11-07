@@ -1,12 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
     <servlet>
-        <servlet-name>Servlet</servlet-name>
-        <servlet-class>com.ServletExample</servlet-class>
+        <servlet-name>StartUp</servlet-name>
+        <servlet-class>com.StartUp</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Register</servlet-name>
+        <servlet-class>pages.Register</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>Servlet</servlet-name>
-        <url-pattern>/Login</url-pattern>
+        <servlet-name>StartUp</servlet-name>
+        <url-pattern>/MainMenu</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Register</servlet-name>
+        <url-pattern>/Register.do</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

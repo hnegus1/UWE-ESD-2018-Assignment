@@ -6,13 +6,14 @@ and open the template in the editor.
 -->
 <html>
     <head>
-        <title>Index</title>
+        <title>Alpha Taxi</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>
+        <!-- Redirects to the start up servlet on start up -->
         <%
-            String redirectURL = "http://localhost:8080/UWE-ESD-2018-Assignment-war/Login";
+            String redirectURL = "http://localhost:8080/UWE-ESD-2018-Assignment-war/MainMenu";
             response.sendRedirect(redirectURL);
         %>
     </body>
