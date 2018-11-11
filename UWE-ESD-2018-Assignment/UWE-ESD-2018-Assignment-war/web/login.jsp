@@ -13,16 +13,14 @@
     </head>
     <body>
        <h2>User Login</h2>  <!--creates the title of the form        -->
-        <form action="Login.do" method="POST" name="LogInForm">    <!-- create a form  send the submitted -->                                                                      
-        Username:<br>  <!-- Prints username om screen and make a new line  -->            
-        <input type="text" name="username" placeholder="KillMeNow">   <!-- creates a text field for username -->  
-        <br>                                                           <!-- Have  a fake userid on Backgound -->    
-        Password:<br><!--prints password and jumps a line  -->  
-        <input type="password" name="password"><!--creates a field(for passwords)  -->  
-        <br>
-        <a>
-        <button type=submit" form="LogInForm" value="Submit">Log in</button> <!--Create button for the log in,type submit for the above form-->
-        </a>
+        <form method="POST" name="LogInForm" action="Login.do">    <!-- create a form  send the submitted -->                                                                      
+            Username:<br>  <!-- Prints username om screen and make a new line  -->            
+            <input type="text" name="username">   <!-- creates a text field for username -->  
+            <br>                                                           <!-- Have  a fake userid on Backgound -->    
+            Password:<br><!--prints password and jumps a line  -->  
+            <input type="password" name="password"><!--creates a field(for passwords)  -->  
+            <br>
+            <button type=submit" name="submit" value="Submit">Log in</button> <!--Create button for the log in,type submit for the above form-->
         </form>            <!--exit form  -->
     
   <!--<br> Br is in case we want the 2nd button to be below the 1st button rather than next to it-->

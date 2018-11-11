@@ -10,7 +10,7 @@
     </servlet>
     <servlet>
         <servlet-name>Login</servlet-name>
-        <servlet-class>Pages.Login</servlet-class>
+        <servlet-class>pages.Login</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>StartUp</servlet-name>

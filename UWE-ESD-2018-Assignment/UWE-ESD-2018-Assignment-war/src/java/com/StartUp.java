@@ -3,6 +3,7 @@
  */
 package com;
 
+import model.Database;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -28,7 +29,7 @@ public class StartUp extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        Config config = (Config) getServletContext().getAttribute("config");
+        Database config = (Database) getServletContext().getAttribute("config");
                 
         response.setContentType("text/html;charset=UTF-8");
         request.getRequestDispatcher("MainMenu.jsp").forward(request, response);      

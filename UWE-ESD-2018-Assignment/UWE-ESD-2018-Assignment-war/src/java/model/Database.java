@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com;
+package model;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -20,7 +20,7 @@ import javax.servlet.annotation.WebListener;
  * @author Harry
  */
 @WebListener
-public class Config implements ServletContextListener {
+public class Database implements ServletContextListener {
     
     //SQL connections and statements
     private static Connection conn = null;
@@ -36,7 +36,7 @@ public class Config implements ServletContextListener {
             exception.printStackTrace();
         }
         
-        event.getServletContext().setAttribute("config", this);
+        event.getServletContext().setAttribute("db", this);
     }
 
     public void contextDestroyed(ServletContextEvent event) {
@@ -81,6 +81,20 @@ public class Config implements ServletContextListener {
             stmt.executeUpdate(sql);
         }catch(Exception exception){
             exception.printStackTrace();
+        }
+    }
+    
+    //Like execute query, but will only get first element of the first row
+    //This is useful for matching into other tables.
+    public int getID(String sql){
+         try{
+            stmt = conn.createStatement();
+            ResultSet results = stmt.executeQuery(sql);
+            results.next();
+            return (int)results.getObject(0);
+        }catch(Exception exception){
+            exception.printStackTrace();
+            return -1;//error
         }
     }
 
