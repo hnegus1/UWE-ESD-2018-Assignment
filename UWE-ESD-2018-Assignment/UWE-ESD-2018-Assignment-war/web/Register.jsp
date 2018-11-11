@@ -15,12 +15,14 @@
         <h1>User Registration</h1>
         <form method="POST"
             action="Register.do">
-            Name: <input type="text" name="NAME" required="required"/><br/>
-            Email: <input type="email" name="EMAIL" required="required"/><br/>
-            Password: <input type="password" name="PASSWORD" required="required"/><br/>
+            Name: <input type="text" name="NAME" required="required" maxlength="20"/><br/>
+            <%--Email: <input type="email" name="EMAIL" required="required"/><br/>--%>
+            Password: <input type="password" name="PASSWORD" required="required" maxlength="20"/><br/>
+            Address: <input type="text" name="ADDRESS" required="required" maxlength="60"/><br/>
+            <%--
             Phone: <input type="tel" name="PHONE" required="required" 
                           pattern="\d{3}[\-]\d{3}[\-]\d{4}" 
-                          placeholder="xxx-xxx-xxxx"/><br/><br/>
+                          placeholder="xxx-xxx-xxxx"/><br/><br/>--%>
             
            <input type="submit" value="Register"/>
     </body>

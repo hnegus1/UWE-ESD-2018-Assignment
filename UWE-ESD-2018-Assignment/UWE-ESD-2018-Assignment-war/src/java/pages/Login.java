@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Pages;
+package pages;
 
-import com.Config;
+import model.Database;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -31,13 +31,13 @@ public class Login extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        Config config = (Config) getServletContext().getAttribute("config");// CONNECTS TO THE DATABASE
+        Database db = (Database) getServletContext().getAttribute("db");// CONNECTS TO THE DATABASE
         String [] query = new String[2]; // create a string queries for username and pass
         query[0] = (String)request.getParameter("username"); // takes the username input 
         query[1] = (String)request.getParameter("password"); /// takes the password inout
-        String qry = String.format("SELECT username, password FROM USERS WHERE username='%s' AND password='%s'",query[0], query[1]);
+        String qry = String.format("SELECT username, password, usertype FROM USERS WHERE username='%s' AND password='%s'",query[0], query[1]);
         //check if the user name and the password are correct by taking values.. going to database and check for results
-        ArrayList<ArrayList> results = config.executeQuery(qry);//gets the results 
+        ArrayList<ArrayList> results = db.executeQuery(qry);//gets the results 
         if (results.isEmpty()) { // if they re empty Or wrong you will go into a fail log in page
             try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
@@ -57,10 +57,11 @@ public class Login extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");               //  if thet re correct you go into a welcome screen by takin your
-            out.println("<title>Welcome screent</title>");   //inputs  get from user get the person with the right inputs        
+            out.println("<title>Welcome screen</title>");   //inputs  get from user get the person with the right inputs        
             out.println("</head>");
             out.println("<body>");
             out.println("<h1> Welcome, " + results.get(0).get(0) +  "</h1>");
+            out.print("<p>This is the " + results.get(0).get(2) + " homepage</p>");
             out.println("</body>");
             out.println("</html>");
         }
