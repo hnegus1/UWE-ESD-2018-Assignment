@@ -9,7 +9,7 @@
 <html>
     <h1>Alpha Taxi</h1>
         <form method="POST"
-            action="Login">
+            action="login.jsp">
                   <input name="button" type="submit" value="Login"/>
         </form>
         <br/>
