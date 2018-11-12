@@ -28,12 +28,10 @@ public class Register extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         Database db = (Database) getServletContext().getAttribute("db");
         
-        String [] query = new String[4];
+        String [] query = new String[3];
         query[0] = (String)request.getParameter("NAME");
-        //query[0] = (String)request.getParameter("EMAIL");
         query[1] = (String)request.getParameter("PASSWORD");
         query[2] = (String)request.getParameter("ADDRESS");
-        //query[0] = (String)request.getParameter("PHONE");
         String str = String.format("INSERT INTO USERS(USERNAME, PASSWORD, USERTYPE) VALUES ('%s','%s','%s')", query[0], query[1], "customer");
         db.executeUpdate(str);
         int userid = db.getID(String.format("SELECT ID FROM USERS WHERE USERNAME='%s' AND PASSWORD='%s'", query[0], query[1]));

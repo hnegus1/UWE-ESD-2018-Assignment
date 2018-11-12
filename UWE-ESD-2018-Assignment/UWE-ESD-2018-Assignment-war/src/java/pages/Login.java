@@ -52,6 +52,20 @@ public class Login extends HttpServlet {
             out.println("</html>");
         }
         }
+        else {
+            if (results.get(0).get(2).equals("admin")) {
+                response.setContentType("text/html;charset=UTF-8");
+                request.getRequestDispatcher("Admin.jsp").forward(request, response);
+            }
+            else if (results.get(0).get(2).equals("driver")) {
+                response.setContentType("text/html;charset=UTF-8");
+                request.getRequestDispatcher("Driver.jsp").forward(request, response);
+            }
+            else if (results.get(0).get(2).equals("customer")) {
+                response.setContentType("text/html;charset=UTF-8");
+                request.getRequestDispatcher("Customer.jsp").forward(request, response);
+            }
+        }
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
