@@ -12,7 +12,7 @@
         <title>Admin Page</title>
     </head>
     <body>
-        <h1>Admin Page</h1>
+        <h1>Welcome ${name}</h1>
         <form method="POST"
             action="placeholder">
                   <input name="button" type="submit" value="Assign Driver"/>

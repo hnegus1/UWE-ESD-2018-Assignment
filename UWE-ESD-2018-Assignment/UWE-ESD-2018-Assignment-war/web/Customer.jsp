@@ -12,7 +12,7 @@
         <title>Customer Page</title>
     </head>
     <body>
-        <h1>Customer Page</h1>
+        <h1>Welcome ${name}</h1>
         <body>
         <form method="POST"
             action="placeholder">

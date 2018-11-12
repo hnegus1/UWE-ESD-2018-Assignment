@@ -53,31 +53,24 @@ public class Login extends HttpServlet {
         }
         }
         else {
+            String userName = new String();
+            userName = "" + results.get(0).get(0);
+            
             if (results.get(0).get(2).equals("admin")) {
                 response.setContentType("text/html;charset=UTF-8");
+                request.setAttribute("name", userName);
                 request.getRequestDispatcher("Admin.jsp").forward(request, response);
             }
             else if (results.get(0).get(2).equals("driver")) {
                 response.setContentType("text/html;charset=UTF-8");
+                request.setAttribute("name", userName);
                 request.getRequestDispatcher("Driver.jsp").forward(request, response);
             }
             else if (results.get(0).get(2).equals("customer")) {
                 response.setContentType("text/html;charset=UTF-8");
+                request.setAttribute("name", userName);
                 request.getRequestDispatcher("Customer.jsp").forward(request, response);
             }
-        }
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");               //  if thet re correct you go into a welcome screen by takin your
-            out.println("<title>Welcome screen</title>");   //inputs  get from user get the person with the right inputs        
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1> Welcome, " + results.get(0).get(0) +  "</h1>");
-            out.print("<p>This is the " + results.get(0).get(2) + " homepage</p>");
-            out.println("</body>");
-            out.println("</html>");
         }
         }
 
