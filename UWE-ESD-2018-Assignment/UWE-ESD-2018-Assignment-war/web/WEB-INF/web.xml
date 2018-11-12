@@ -12,6 +12,10 @@
         <servlet-name>Login</servlet-name>
         <servlet-class>pages.Login</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>WebServiceExample</servlet-name>
+        <servlet-class>com.WebServiceExample</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>StartUp</servlet-name>
         <url-pattern>/MainMenu</url-pattern>
@@ -23,6 +27,10 @@
     <servlet-mapping>
         <servlet-name>Login</servlet-name>
         <url-pattern>/Login.do</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>WebServiceExample</servlet-name>
+        <url-pattern>/WebServiceExample</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
