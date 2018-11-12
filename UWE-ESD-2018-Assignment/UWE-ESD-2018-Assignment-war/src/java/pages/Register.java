@@ -36,8 +36,8 @@ public class Register extends HttpServlet {
         //query[0] = (String)request.getParameter("PHONE");
         String str = String.format("INSERT INTO USERS(USERNAME, PASSWORD, USERTYPE) VALUES ('%s','%s','%s')", query[0], query[1], "customer");
         db.executeUpdate(str);
-        int userid = db.getID(String.format("SELECT ID USERS WHERE USERNAME = '%s' AND PASSWORD = '%s'", query[0], query[1]));
-        db.executeUpdate(String.format("INSERT INTO CUSTOMERS(ADDRESS, USERID) VALUES ('%s',%d)", query[2], userid));
+        int userid = db.getID(String.format("SELECT ID FROM USERS WHERE USERNAME='%s' AND PASSWORD='%s'", query[0], query[1]));
+        db.executeUpdate(String.format("INSERT INTO CUSTOMER(ADDRESS, USERID) VALUES ('%s',%d)", query[2], userid));
         
         
         try (PrintWriter out = response.getWriter()) {

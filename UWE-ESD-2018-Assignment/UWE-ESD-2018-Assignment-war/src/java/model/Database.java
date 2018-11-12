@@ -92,7 +92,7 @@ public class Database implements ServletContextListener {
             stmt = conn.createStatement();
             ResultSet results = stmt.executeQuery(sql);
             results.next();
-            return (int)results.getObject(0);
+            return (int)results.getObject(1);
         }catch(Exception exception){
             exception.printStackTrace();
             return -1;//error
