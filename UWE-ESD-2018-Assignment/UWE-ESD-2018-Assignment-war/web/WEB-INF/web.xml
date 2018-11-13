@@ -16,6 +16,10 @@
         <servlet-name>WebServiceExample</servlet-name>
         <servlet-class>com.WebServiceExample</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>GoogleMapsTest</servlet-name>
+        <servlet-class>com.GoogleMapsTest</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>StartUp</servlet-name>
         <url-pattern>/MainMenu</url-pattern>
@@ -31,6 +35,10 @@
     <servlet-mapping>
         <servlet-name>WebServiceExample</servlet-name>
         <url-pattern>/WebServiceExample</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GoogleMapsTest</servlet-name>
+        <url-pattern>/GoogleMapsTest</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
