@@ -32,10 +32,22 @@ public class Register extends HttpServlet {
         query[0] = (String)request.getParameter("NAME");
         query[1] = (String)request.getParameter("PASSWORD");
         query[2] = (String)request.getParameter("ADDRESS");
-        String str = String.format("INSERT INTO USERS(USERNAME, PASSWORD, USERTYPE) VALUES ('%s','%s','%s')", query[0], query[1], "customer");
-        db.executeUpdate(str);
-        int userid = db.getID(String.format("SELECT ID FROM USERS WHERE USERNAME='%s' AND PASSWORD='%s'", query[0], query[1]));
-        db.executeUpdate(String.format("INSERT INTO CUSTOMER(ADDRESS, USERID) VALUES ('%s',%d)", query[2], userid));
+        
+//        String url = new String();
+        String url = request.getHeader("referer");
+       
+        if (url.equals("http://localhost:8080/UWE-ESD-2018-Assignment-war/Register.jsp")){
+            String str = String.format("INSERT INTO USERS(USERNAME, PASSWORD, USERTYPE) VALUES ('%s','%s','%s')", query[0], query[1], "customer");
+            db.executeUpdate(str);
+            int userid = db.getID(String.format("SELECT ID FROM USERS WHERE USERNAME='%s' AND PASSWORD='%s'", query[0], query[1]));
+            db.executeUpdate(String.format("INSERT INTO CUSTOMER(ADDRESS, USERID) VALUES ('%s',%d)", query[2], userid));
+        }
+        else if (url.equals("http://localhost:8080/UWE-ESD-2018-Assignment-war/DriverRegister.jsp")) {
+            String str = String.format("INSERT INTO USERS(USERNAME, PASSWORD, USERTYPE) VALUES ('%s','%s','%s')", query[0], query[1], "driver");
+            db.executeUpdate(str);
+            int userid = db.getID(String.format("SELECT ID FROM USERS WHERE USERNAME='%s' AND PASSWORD='%s'", query[0], query[1]));
+            db.executeUpdate(String.format("INSERT INTO DRIVER(REGISTRATION, USERID) VALUES ('%s',%d)", query[2], userid));
+        }
         
         
         try (PrintWriter out = response.getWriter()) {

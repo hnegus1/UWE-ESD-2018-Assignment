@@ -18,7 +18,7 @@
                   <input name="button" type="submit" value="Assign Driver"/>
         </form>
         <form method="POST"
-            action="placeholder">
+            action="DriverRegister.jsp">
                   <input name="button" type="submit" value="New Driver"/>
         </form>
         <form method="POST"
