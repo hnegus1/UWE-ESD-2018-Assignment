@@ -36,6 +36,7 @@ public class Login extends HttpServlet {
         query[0] = (String)request.getParameter("username"); // takes the username input 
         query[1] = (String)request.getParameter("password"); /// takes the password inout
         String qry = String.format("SELECT username, password, usertype FROM USERS WHERE username='%s' AND password='%s'",query[0], query[1]);
+        
         //check if the user name and the password are correct by taking values.. going to database and check for results
         ArrayList<ArrayList> results = db.executeQuery(qry);//gets the results 
         if (results.isEmpty()) { // if they re empty Or wrong you will go into a fail log in page
@@ -56,6 +57,8 @@ public class Login extends HttpServlet {
             String userName = new String();
             userName = "" + results.get(0).get(0);
             
+            int userid = db.getID(String.format("SELECT ID FROM USERS WHERE USERNAME='%s' AND PASSWORD='%s'", query[0], query[1]));
+            
             if (results.get(0).get(2).equals("admin")) {
                 response.setContentType("text/html;charset=UTF-8");
                 request.setAttribute("name", userName);
@@ -69,7 +72,8 @@ public class Login extends HttpServlet {
             else if (results.get(0).get(2).equals("customer")) {
                 response.setContentType("text/html;charset=UTF-8");
                 request.setAttribute("name", userName);
-                request.getRequestDispatcher("Customer.jsp").forward(request, response);
+                request.setAttribute("id", userid);
+                request.getRequestDispatcher("ChooseCustomerBooking.jsp").forward(request, response);
             }
         }
         }
