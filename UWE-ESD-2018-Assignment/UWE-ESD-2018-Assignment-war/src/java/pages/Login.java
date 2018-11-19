@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -51,22 +52,25 @@ public class Login extends HttpServlet {
             out.println("<h1>Incorrect username/password!" + "</h1>");
             out.println("</body>");
             out.println("</html>");
-        }
-        }
-        else {
+            }
+        } else {
             String userName = new String();
             userName = "" + results.get(0).get(0);
             
             int userid = db.getID(String.format("SELECT ID FROM USERS WHERE USERNAME='%s' AND PASSWORD='%s'", query[0], query[1]));
+            Cookie loginCookie = new Cookie("user", String.valueOf(userid));
+            response.addCookie(loginCookie);
             
             if (results.get(0).get(2).equals("admin")) {
                 response.setContentType("text/html;charset=UTF-8");
                 request.setAttribute("name", userName);
+                request.setAttribute("id", userid);
                 request.getRequestDispatcher("Admin.jsp").forward(request, response);
             }
             else if (results.get(0).get(2).equals("driver")) {
                 response.setContentType("text/html;charset=UTF-8");
                 request.setAttribute("name", userName);
+                request.setAttribute("id", userid);
                 request.getRequestDispatcher("Driver.jsp").forward(request, response);
             }
             else if (results.get(0).get(2).equals("customer")) {
