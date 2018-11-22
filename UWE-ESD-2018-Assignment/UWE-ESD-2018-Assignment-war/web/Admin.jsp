@@ -34,8 +34,5 @@
               action="placeholder">
                   <input name="button" type="submit" value="Logout"/>
         </form>
-        
-        
-        <p>Att : ${"name"}</p>
     </body>
 </html>

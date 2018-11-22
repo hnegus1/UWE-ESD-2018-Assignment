@@ -8,17 +8,24 @@ package pages;
 import model.Database;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Date;
 import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.sql.ResultSet;
+import javax.servlet.http.Cookie;
+import javax.xml.ws.WebServiceRef;
+import ws.AlphaCabWS_Service;
 /**
  *
  * @author Isaac
  */
 public class CustomerBooking extends HttpServlet {
+
+    @WebServiceRef(wsdlLocation = "WEB-INF/wsdl/localhost_8080/AlphaCabWS/AlphaCabWS.wsdl")
+    private AlphaCabWS_Service service;
     
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -32,49 +39,39 @@ public class CustomerBooking extends HttpServlet {
     
     protected void processRequest (HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException{
         Database db = (Database) getServletContext().getAttribute("db");
-        int one = 2;
-        double price = 10.0;
-        int complete = 0;
-        int paid = 0;
-        String date = new String("2019-05-01");
-        String time = new String("15.33.00");
+        Cookie[] cookies = request.getCookies();
+        String origin = request.getParameter("Origin");
+        String destination = request.getParameter("Destination");
+        java.sql.Date date = java.sql.Date.valueOf(request.getParameter("Date"));
+        java.sql.Time time = java.sql.Time.valueOf(request.getParameter("Time") + ":00");
         
-        String [] query = new String[7];
-        query[0] = (String)request.getParameter("Name");
-        query[1] = (String)request.getParameter("OriginPostcode");
-        query[2] = (String)request.getParameter("DestinationPostcode");
-        query[3] = (String)request.getParameter("Date");
-        query[4] = (String)request.getParameter("Time");
-        query[5] = (String)request.getParameter("username");
-        query[6] = (String)request.getParameter("password");
-        //query[7] = query[3] + " " + query[4];
+        int userID = -1;
         
-        String qry = String.format("SELECT username, password, usertype FROM USERS WHERE username='%s' AND password='%s'",query[5], query[6]);
+         
         
-        //check if the user name and the password are correct by taking values.. going to database and check for results
-        ArrayList<ArrayList> results = db.executeQuery(qry);//gets the results 
-        if (results.isEmpty()) { // if they re empty Or wrong you will go into a fail log in page
-            try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");          
-            out.println("<head>");
-            out.println("<title>Connection error screen</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Incorrect username/password!" + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+        //check if session is valid
+        if (cookies != null) {
+            Boolean usrFound = false;
+            for (Cookie cookie : cookies) {
+                if(cookie.getName().equals("user")) userID = Integer.parseInt(cookie.getValue()); usrFound = true;
+            }
+            if (!usrFound) {
+                try (PrintWriter out = response.getWriter()) {
+                    /* TODO output your page here. You may use following sample code. */
+                    out.println(showError("Invalid Session! You've probably broken something. Please login and try again."));
+                }
+            }else{//session is valid
+                int customerID = getForeignID(userID, "CUSTOMER");
+                System.out.println(date);
+                System.out.println(time);
+                String update = "INSERT INTO JOURNEY(ORIGIN, DESTINATION, CUSTOMERID, DEPARTURETIME, DEPARTUREDATE) VALUES ('" + origin + "','" + destination + "'," + customerID + ",TIME('" + time + "'), DATE('" + date + "'))";  
+                db.executeUpdate(update);
+                request.getRequestDispatcher("BookingConfirm.jsp").forward(request, response);
+            }
         }
-        } else {
-            int userID = db.getID(String.format("SELECT ID FROM USERS WHERE USERNAME='%s' AND PASSWORD='%s'", query[0], query[1]));
-            //java.sql.Timestamp timestamp = java.sql.Timestamp.valueOf("2007-09-23 11:10:10.0");
-            
-            String str = String.format("INSERT INTO JOURNEY(ORIGIN, DESTINATION, CUSTOMERID, PRICE, COMPLETED, PAID, DEPARTURETIME, DEPARTUREDATE) VALUES ('%s','%s',%d,%f,%d,%d,'%s','%s')", query[1], query[2], userID, price, complete, paid, date, time);
-            db.executeUpdate(str);
 
-            request.getRequestDispatcher("BookingConfirm.jsp").forward(request, response);
-        }
+        
+        
     }
      // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -114,4 +111,18 @@ public class CustomerBooking extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+
+    private String showError(java.lang.String message) {
+        // Note that the injected javax.xml.ws.Service reference as well as port objects are not thread safe.
+        // If the calling of port operations may lead to race condition some synchronization is required.
+        ws.AlphaCabWS port = service.getAlphaCabWSPort();
+        return port.showError(message);
+    }
+
+    private Integer getForeignID(int userID, java.lang.String table) {
+        // Note that the injected javax.xml.ws.Service reference as well as port objects are not thread safe.
+        // If the calling of port operations may lead to race condition some synchronization is required.
+        ws.AlphaCabWS port = service.getAlphaCabWSPort();
+        return port.getForeignID(userID, table);
+    }
 }

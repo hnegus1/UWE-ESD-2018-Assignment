@@ -116,4 +116,36 @@ public class AlphaCabWS {
         
         return sb.toString();
     }
+
+    /**
+     * Web service operation
+     */
+    @WebMethod(operationName = "showError")
+    public String showError(@WebParam(name = "message") String message) {  
+        return "<!DOCTYPE html><html><head><title>Error!</title></head><body><h1>Error!</h1><p>" + message + "</p></body></html>";
+    }
+
+    /**
+     * Web service operation
+     */
+    @WebMethod(operationName = "getForeignID")
+    public Integer getForeignID(@WebParam(name = "userID") int userID, @WebParam(name = "table") String table) {
+        try{        
+            conn = DriverManager.getConnection("jdbc:derby://localhost:1527/AlphaCab", "username", "password");
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+        
+        try{
+            stmt = conn.createStatement();
+            results = stmt.executeQuery("SELECT ID FROM " + table + " WHERE USERID=" + userID);
+            rsmd = results.getMetaData();
+            results.next();
+            return results.getInt(1);
+        }catch(SQLException e){
+            e.printStackTrace();
+            return null;
+        }    
+    }
+
 }

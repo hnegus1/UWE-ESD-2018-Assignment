@@ -21,12 +21,17 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import javax.xml.ws.WebServiceRef;
+import ws.AlphaCabWS_Service;
 
 /**
  *
  * @author Harry
  */
 public class GoogleMapsTest extends HttpServlet {
+
+    @WebServiceRef(wsdlLocation = "WEB-INF/wsdl/localhost_8080/AlphaCabWS/AlphaCabWS.wsdl")
+    private AlphaCabWS_Service service;
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
