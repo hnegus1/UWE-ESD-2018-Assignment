@@ -28,6 +28,10 @@
         <servlet-name>LogOut</servlet-name>
         <servlet-class>pages.LogOut</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ExampleData</servlet-name>
+        <servlet-class>model.ExampleData</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>StartUp</servlet-name>
         <url-pattern>/MainMenu</url-pattern>
@@ -55,6 +59,10 @@
     <servlet-mapping>
         <servlet-name>LogOut</servlet-name>
         <url-pattern>/LogOut</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ExampleData</servlet-name>
+        <url-pattern>/ExampleData</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

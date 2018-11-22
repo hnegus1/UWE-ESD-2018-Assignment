@@ -1,0 +1,6 @@
+Kings Cross Station, London;129 Station Rd, London, N3 2AS;Eva Smith;Mehmet Aydin;2015-10-14;09:30:00;24;6.3;1
+Heathrow Terminal 3, London;31 Clifton Rd, London, N3 2SG;Gul Hikmet;Mehmet Aydin;2015-10-14;12:00:00;48;16.8;1
+120 Green Lanes, London, N13;31 Clifton Rd, London, N3 2SG;Gul Hikmet;John Smith;2015-10-15;06:00:00;48;10.6;1
+131 Stoke Newington High Road, London, N12;31 Clifton Rd, London, N3 2SG;Gul Hikmet;John Smith;2015-10-15;12:00:00;24;7.3;1
+Luton Airport, Luton;129 Station Rd, London, N3 2AS;Eva Smith;Mehmet Aydin;2015-10-22;10:00:00;48;38.0;1
+Kings Cross, London;Finchley, London;M. E. Aydin;null;2015-11-02;09:22:18;null;null;0

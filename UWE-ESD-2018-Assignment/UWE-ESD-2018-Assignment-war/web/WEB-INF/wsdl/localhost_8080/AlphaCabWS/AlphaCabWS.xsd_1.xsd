@@ -4,7 +4,6 @@
 
 <xs:element name="addListResponse" type="tns:addListResponse"/>
 
-<<<<<<< OURS
 <xs:element name="getForeignID" type="tns:getForeignID"/>
 
 <xs:element name="getForeignIDResponse" type="tns:getForeignIDResponse"/>
@@ -38,8 +37,6 @@
 </xs:sequence>
 </xs:complexType>
 
-=======
->>>>>>> THEIRS
 <xs:complexType name="addList">
 <xs:sequence>
 <xs:element name="sql" type="xs:string" minOccurs="0"/>
