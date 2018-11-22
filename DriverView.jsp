@@ -22,7 +22,7 @@
         </a>
         <br>
 
-        <a href="Login.jsp">  <!-- Create a Button to link to the login page -->
+        <a href="login.jsp">  <!-- Create a Button to link to the login page -->
         <button>Logout</button>
         </a>
     </body>
