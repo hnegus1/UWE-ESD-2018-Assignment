@@ -14,16 +14,16 @@
     <body>
         <h1>Welcome ${name}</h1>
         <form method="POST"
-            action="placeholder">
+            action="Availability.jsp">
                   <input name="button" type="submit" value="Availability"/>
         </form>
         <form method="POST"
-            action="placeholder">
+            action="JobList">
                   <input name="button" type="submit" value="Transport"/>
         </form>
         <br/>
         <form method="POST"
-              action="placeholder">
+              action="login.jsp">
                   <input name="button" type="submit" value="Logout"/>
         </form>
     </body>

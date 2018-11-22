@@ -95,13 +95,17 @@ public class AlphaCabWS {
                     
                     while(results.next()){
                         int row = 0;
+                        int ID = -1;
                         sb.append("<tr>");
-                        for (int col = 1; col < rsmd.getColumnCount() + 1; col++) {
+                        for (int col = 1; col < rsmd.getColumnCount() + 1; col++) {                           
                             sb.append("<th>");
                             sb.append(String.valueOf(results.getObject(col)));//adds a column
                             sb.append("</th>");
+                            if (rsmd.getColumnName(col)=="ID") {
+                                ID=(int)results.getObject(col);
+                            }
                         }
-                        sb.append("<th><input type='radio' value='"+row+"'></th>");
+                        sb.append("<th><input type='radio' value='"+ID+"'></th>");
                         sb.append("</tr>");
                         row++;
                     }

@@ -3,14 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com;
+package pages;
 
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.xml.ws.WebServiceRef;
 import ws.AlphaCabWS_Service;
 
@@ -18,7 +20,7 @@ import ws.AlphaCabWS_Service;
  *
  * @author Harry
  */
-public class WebServiceExample extends HttpServlet {
+public class JobList extends HttpServlet {
 
     @WebServiceRef(wsdlLocation = "WEB-INF/wsdl/localhost_8080/AlphaCabWS/AlphaCabWS.wsdl")
     private AlphaCabWS_Service service;
@@ -34,20 +36,26 @@ public class WebServiceExample extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet WebServiceExample</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet WebServiceExample at " + request.getContextPath() + "</h1>");
-            out.println(addList("SELECT * FROM USERS", "RADIO"));          
-            out.println("</body>");
-            out.println("</html>");
+        Cookie[] cookies = request.getCookies();
+        int userID = -1;
+        int driverID = -1;
+        HttpSession session = request.getSession(true);
+        
+        if (cookies != null) {
+            for (Cookie cookie : cookies) {
+                if(cookie.getName().equals("user")) userID = Integer.parseInt(cookie.getValue());
+            }
         }
+        
+        driverID=getForeignID(userID, "DRIVER");
+        String test = addList("SELECT * FROM DRIVER WHERE DRIVERID=" + driverID, "RADIO");
+        String test1 = "SELECT * FROM DRIVER WHERE DRIVERID=" + driverID;
+        System.out.println("");
+        session.setAttribute("table", addList("SELECT * FROM JOURNEY WHERE COMPLETED=0 AND DRIVERID=" + driverID, "RADIO"));
+        response.sendRedirect("JobSubmission.jsp");
+        
+        
+              
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -94,6 +102,13 @@ public class WebServiceExample extends HttpServlet {
         // If the calling of port operations may lead to race condition some synchronization is required.
         ws.AlphaCabWS port = service.getAlphaCabWSPort();
         return port.addList(sql, type);
+    }
+
+    private Integer getForeignID(int userID, java.lang.String table) {
+        // Note that the injected javax.xml.ws.Service reference as well as port objects are not thread safe.
+        // If the calling of port operations may lead to race condition some synchronization is required.
+        ws.AlphaCabWS port = service.getAlphaCabWSPort();
+        return port.getForeignID(userID, table);
     }
 
 }
