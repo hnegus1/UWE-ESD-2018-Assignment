@@ -22,6 +22,18 @@
 <message name="showErrorResponse">
 <part name="parameters" element="tns:showErrorResponse"/>
 </message>
+<message name="googleMapsDistance">
+<part name="parameters" element="tns:googleMapsDistance"/>
+</message>
+<message name="googleMapsDistanceResponse">
+<part name="parameters" element="tns:googleMapsDistanceResponse"/>
+</message>
+<message name="ProtocolException">
+<part name="fault" element="tns:ProtocolException"/>
+</message>
+<message name="IOException">
+<part name="fault" element="tns:IOException"/>
+</message>
 <portType name="AlphaCabWS">
 <operation name="addList">
 <input wsam:Action="http://ws/AlphaCabWS/addListRequest" message="tns:addList"/>
@@ -34,6 +46,12 @@
 <operation name="showError">
 <input wsam:Action="http://ws/AlphaCabWS/showErrorRequest" message="tns:showError"/>
 <output wsam:Action="http://ws/AlphaCabWS/showErrorResponse" message="tns:showErrorResponse"/>
+</operation>
+<operation name="googleMapsDistance">
+<input wsam:Action="http://ws/AlphaCabWS/googleMapsDistanceRequest" message="tns:googleMapsDistance"/>
+<output wsam:Action="http://ws/AlphaCabWS/googleMapsDistanceResponse" message="tns:googleMapsDistanceResponse"/>
+<fault message="tns:ProtocolException" name="ProtocolException" wsam:Action="http://ws/AlphaCabWS/googleMapsDistance/Fault/ProtocolException"/>
+<fault message="tns:IOException" name="IOException" wsam:Action="http://ws/AlphaCabWS/googleMapsDistance/Fault/IOException"/>
 </operation>
 </portType>
 <binding name="AlphaCabWSPortBinding" type="tns:AlphaCabWS">
@@ -64,6 +82,21 @@
 <output>
 <soap:body use="literal"/>
 </output>
+</operation>
+<operation name="googleMapsDistance">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+<fault name="ProtocolException">
+<soap:fault name="ProtocolException" use="literal"/>
+</fault>
+<fault name="IOException">
+<soap:fault name="IOException" use="literal"/>
+</fault>
 </operation>
 </binding>
 <service name="AlphaCabWS">

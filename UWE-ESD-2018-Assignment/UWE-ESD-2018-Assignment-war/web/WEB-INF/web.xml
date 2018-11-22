@@ -36,6 +36,10 @@
         <servlet-name>JobList</servlet-name>
         <servlet-class>pages.JobList</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>BookJourney</servlet-name>
+        <servlet-class>pages.BookJourney</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>StartUp</servlet-name>
         <url-pattern>/MainMenu</url-pattern>
@@ -71,6 +75,10 @@
     <servlet-mapping>
         <servlet-name>JobList</servlet-name>
         <url-pattern>/JobList</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>BookJourney</servlet-name>
+        <url-pattern>/BookJourney.do</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

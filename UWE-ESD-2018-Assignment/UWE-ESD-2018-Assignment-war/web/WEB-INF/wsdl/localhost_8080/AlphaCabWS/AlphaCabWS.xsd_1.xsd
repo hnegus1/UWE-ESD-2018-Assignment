@@ -1,5 +1,9 @@
 <?xml version='1.0' encoding='UTF-8'?><!-- Published by JAX-WS RI (http://jax-ws.java.net). RI's version is Metro/2.4.0 (wsit240-7e98ff4; 2017-08-03T21:19:54+0200) JAXWS-RI/2.3.0 JAXWS-API/2.3.0 JAXB-RI/2.3.0 JAXB-API/2.3.0 svn-revision#unknown. --><xs:schema xmlns:tns="http://ws/" xmlns:xs="http://www.w3.org/2001/XMLSchema" version="1.0" targetNamespace="http://ws/">
 
+<xs:element name="IOException" type="tns:IOException"/>
+
+<xs:element name="ProtocolException" type="tns:ProtocolException"/>
+
 <xs:element name="addList" type="tns:addList"/>
 
 <xs:element name="addListResponse" type="tns:addListResponse"/>
@@ -7,6 +11,10 @@
 <xs:element name="getForeignID" type="tns:getForeignID"/>
 
 <xs:element name="getForeignIDResponse" type="tns:getForeignIDResponse"/>
+
+<xs:element name="googleMapsDistance" type="tns:googleMapsDistance"/>
+
+<xs:element name="googleMapsDistanceResponse" type="tns:googleMapsDistanceResponse"/>
 
 <xs:element name="showError" type="tns:showError"/>
 
@@ -34,6 +42,31 @@
 <xs:complexType name="showErrorResponse">
 <xs:sequence>
 <xs:element name="return" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="googleMapsDistance">
+<xs:sequence>
+<xs:element name="origin" type="xs:string" minOccurs="0"/>
+<xs:element name="destination" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="googleMapsDistanceResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="ProtocolException">
+<xs:sequence>
+<xs:element name="message" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="IOException">
+<xs:sequence>
+<xs:element name="message" type="xs:string" minOccurs="0"/>
 </xs:sequence>
 </xs:complexType>
 

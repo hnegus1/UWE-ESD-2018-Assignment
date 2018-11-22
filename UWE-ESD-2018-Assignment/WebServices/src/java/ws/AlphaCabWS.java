@@ -5,6 +5,14 @@
  */
 package ws;
 
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.ProtocolException;
+import java.net.URL;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -150,6 +158,37 @@ public class AlphaCabWS {
             e.printStackTrace();
             return null;
         }    
+    }
+
+    /**
+     * Web service operation
+     */
+    @WebMethod(operationName = "googleMapsDistance")
+    public String googleMapsDistance(@WebParam(name = "origin") String origin, @WebParam(name = "destination") String destination) throws ProtocolException, IOException {
+        String definitelyNotAnAPIKey = "AIzaSyAi3G7IlxfDOt9xMycDOq5TKxWi5FvEhUc"; //oc do not steal 
+        String url_string = "https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins=" + origin + "&destinations=" + destination +"&key=" + definitelyNotAnAPIKey;
+        url_string = url_string.replace(" ", "");
+        
+        URL url = new URL(url_string);
+        System.out.println(url);
+        HttpURLConnection con = (HttpURLConnection) url.openConnection();
+        con.setRequestMethod("GET");
+        con.connect();
+        
+        BufferedReader in = new BufferedReader(
+        new InputStreamReader(con.getInputStream()));
+        String inputLine;
+        StringBuffer content = new StringBuffer();
+        while ((inputLine = in.readLine()) != null) {
+           content.append(inputLine);
+        }
+        in.close();
+        con.disconnect();
+        
+        JsonObject jsonObject = new JsonParser().parse(content.toString()).getAsJsonObject();
+               
+        String distance = jsonObject.getAsJsonArray("rows").get(0).getAsJsonObject().get("elements").getAsJsonArray().get(0).getAsJsonObject().get("distance").getAsJsonObject().get("text").getAsString();
+        return distance;
     }
 
 }

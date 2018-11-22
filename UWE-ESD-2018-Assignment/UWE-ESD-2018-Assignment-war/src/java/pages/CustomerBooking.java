@@ -16,8 +16,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.sql.ResultSet;
 import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpSession;
 import javax.xml.ws.WebServiceRef;
 import ws.AlphaCabWS_Service;
+import ws.IOException_Exception;
+import ws.ProtocolException_Exception;
 /**
  *
  * @author Isaac
@@ -45,6 +48,8 @@ public class CustomerBooking extends HttpServlet {
         java.sql.Date date = java.sql.Date.valueOf(request.getParameter("Date"));
         java.sql.Time time = java.sql.Time.valueOf(request.getParameter("Time") + ":00");
         
+        HttpSession session = request.getSession(true);
+        
         int userID = -1;
         
          
@@ -62,10 +67,19 @@ public class CustomerBooking extends HttpServlet {
                 }
             }else{//session is valid
                 int customerID = getForeignID(userID, "CUSTOMER");
-                System.out.println(date);
-                System.out.println(time);
-                String update = "INSERT INTO JOURNEY(ORIGIN, DESTINATION, CUSTOMERID, DEPARTURETIME, DEPARTUREDATE) VALUES ('" + origin + "','" + destination + "'," + customerID + ",TIME('" + time + "'), DATE('" + date + "'))";  
-                db.executeUpdate(update);
+                String distance = googleMapsDistance(origin, destination);
+                distance = distance.replaceAll("[^\\.0123456789]","");
+                double price = (Double.parseDouble(distance) * 4);//arbitrarily chosen
+                
+                session.setAttribute("origin", origin);
+                session.setAttribute("destination", destination);
+                session.setAttribute("date", date.toString());
+                session.setAttribute("time", time.toString());
+                session.setAttribute("customerID", customerID);
+                session.setAttribute("distance", distance);
+                session.setAttribute("price", price);
+                
+                       
                 request.getRequestDispatcher("BookingConfirm.jsp").forward(request, response);
             }
         }
@@ -125,4 +139,25 @@ public class CustomerBooking extends HttpServlet {
         ws.AlphaCabWS port = service.getAlphaCabWSPort();
         return port.getForeignID(userID, table);
     }
+    
+    private String googleMapsDistance(String origin, String destination) {
+        // Note that the injected javax.xml.ws.Service reference as well as port objects are not thread safe.
+        // If the calling of port operations may lead to race condition some synchronization is required.
+        ws.AlphaCabWS port = service.getAlphaCabWSPort();
+        try{
+            return port.googleMapsDistance(origin, destination);
+        }catch(Exception e){
+            return "Error";
+        }
+        
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
 }

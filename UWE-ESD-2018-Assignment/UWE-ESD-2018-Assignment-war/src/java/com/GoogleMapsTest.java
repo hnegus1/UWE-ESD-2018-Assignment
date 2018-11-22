@@ -49,7 +49,7 @@ public class GoogleMapsTest extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         
-        URL url = new URL("https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins=Washington,DC&destinations=New+York+City,NY&key=" + definitelyNotAnAPIKey);
+        URL url = new URL("https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins=New York City, NY&destinations=Washington, WA&key=AIzaSyAi3G7IlxfDOt9xMycDOq5TKxWi5FvEhUc");
         HttpURLConnection con = (HttpURLConnection) url.openConnection();
         con.setRequestMethod("GET");
         con.connect();
