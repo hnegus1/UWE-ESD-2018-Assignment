@@ -20,6 +20,18 @@
 
 <xs:element name="showErrorResponse" type="tns:showErrorResponse"/>
 
+<xs:complexType name="showError">
+<xs:sequence>
+<xs:element name="message" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="showErrorResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
 <xs:complexType name="getForeignID">
 <xs:sequence>
 <xs:element name="userID" type="xs:int"/>
@@ -30,18 +42,6 @@
 <xs:complexType name="getForeignIDResponse">
 <xs:sequence>
 <xs:element name="return" type="xs:int" minOccurs="0"/>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="showError">
-<xs:sequence>
-<xs:element name="message" type="xs:string" minOccurs="0"/>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="showErrorResponse">
-<xs:sequence>
-<xs:element name="return" type="xs:string" minOccurs="0"/>
 </xs:sequence>
 </xs:complexType>
 
