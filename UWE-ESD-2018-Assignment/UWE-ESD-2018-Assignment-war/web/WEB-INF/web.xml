@@ -5,6 +5,10 @@
         <servlet-class>com.StartUp</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>Turnover</servlet-name>
+        <servlet-class>pages.Turnover</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>Register</servlet-name>
         <servlet-class>pages.Register</servlet-class>
     </servlet>
@@ -79,6 +83,10 @@
     <servlet-mapping>
         <servlet-name>BookJourney</servlet-name>
         <url-pattern>/BookJourney.do</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Turnover</servlet-name>
+        <url-pattern>/Turnover.do</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
