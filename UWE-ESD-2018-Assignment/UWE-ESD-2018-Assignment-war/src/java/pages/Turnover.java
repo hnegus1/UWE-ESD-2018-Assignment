@@ -34,18 +34,37 @@ public class Turnover extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         Database db = (Database) getServletContext().getAttribute("db");// CONNECTS TO THE DATABASE
-        double sum=0.0;
-        //String [] query = new String[1]; // create a string que for price
-       // query[0] = (String)request.getParameter("username"); 
-        //String qry = String.format("SELECT SUM(PRICE) FROM JOOURNEY WHERE PAID='1'",query[0]);
-       
-        String qry = String.format("SELECT PRICE FROM JOURNEY WHERE PAID='1'");//slect price from journey table where they did pay
-        ArrayList<ArrayList> results = db.executeQuery(qry);//gets the results  as an array
-        int counter=0; // a variable used for  counting the solution
-        for (counter=0;counter<results.size();counter++){ //loop al long as there solution  in the results
-            sum+= Double.parseDouble((String)results.get(counter).get(0));// and add ther values to sum once u convert em to double
-          
-             }//end of for 
+        String [] query = new String[2]; // create a string queries for the 2 dates you wanna check if u were paid
+        query[0] = (String)request.getParameter("StartDate"); // takes the first date input 
+        query[1] = (String)request.getParameter("EndDate"); /// takes the second date inout
+        
+        String qry=String.format("SELECT SUM(PRICE) FROM JOURNEY WHERE  DEPARTUREDATE BETWEEN DATE('%s') AND DATE('%s') AND PAID=1", query[0],query[1]);
+        //The SUM() function returns the total sum of a numeric column. So we choose the price column from the Journey databsae
+        //where the Date is between the admins choice and where they were actually paid 
+        ArrayList<ArrayList> results = db.executeQuery(qry);
+        
+        try (PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");               // when the admin presses calculate the new page pops
+            out.println("<title>Welcome screen</title>");   //        out with the total SUM within those dates
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Turnover</h1>");
+            out.println("<p>Turnover was " + results.get(0).get(0) + "</p>");
+            out.println("</body>");
+            out.println("</html>");
+        }
+        /// the code below no longer works BUT it was the original idea of choosing everything and adding them
+//        String qry = String.format("SELECT PRICE FROM JOURNEY WHERE PAID='1'");//slect price from journey table where they did pay
+//        ArrayList<ArrayList> results = db.executeQuery(qry);//gets the results  as an array
+//        int counter=0; // a variable used for  counting the solution
+//        double sum=0.0;
+//        for (counter=0;counter<results.size();counter++){ //loop al long as there solution  in the results
+//            sum+= Double.parseDouble((String)results.get(counter).get(0));// and add ther values to sum once u convert em to double
+//          
+//             }//end of for 
         
         }
 
