@@ -36,7 +36,7 @@ public class Availability extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         Database db = (Database) getServletContext().getAttribute("db");
         
-        String [] query = new String[2];
+        String [] query = new String[3];
         
         query[0] = ((String)request.getParameter("sdate"));
         query[1] = ((String)request.getParameter("edate"));

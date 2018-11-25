@@ -109,11 +109,11 @@ public class AlphaCabWS {
                             sb.append("<th>");
                             sb.append(String.valueOf(results.getObject(col)));//adds a column
                             sb.append("</th>");
-                            if (rsmd.getColumnName(col)=="ID") {
+                            if (rsmd.getColumnName(col).equals("ID")) {
                                 ID=(int)results.getObject(col);
                             }
                         }
-                        sb.append("<th><input type='radio' value='"+ID+"'></th>");
+                        sb.append("<th><input type='radio' name='ID' value='"+ID+"'></th>");
                         sb.append("</tr>");
                         row++;
                     }
