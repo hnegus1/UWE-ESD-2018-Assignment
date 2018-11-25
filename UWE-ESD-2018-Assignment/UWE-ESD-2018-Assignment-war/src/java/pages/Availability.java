@@ -13,7 +13,9 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.xml.ws.WebServiceRef;
 import model.Database;
+import ws.AlphaCabWS_Service;
 
 /**
  *
@@ -21,6 +23,9 @@ import model.Database;
  */
 @WebServlet(name = "Availability", urlPatterns = {"/Availability"})
 public class Availability extends HttpServlet {
+
+    @WebServiceRef(wsdlLocation = "WEB-INF/wsdl/localhost_8080/AlphaCabWS/AlphaCabWS.wsdl")
+    private AlphaCabWS_Service service;
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -36,10 +41,9 @@ public class Availability extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         Database db = (Database) getServletContext().getAttribute("db");
         
-        String [] query = new String[3];
-        
-        query[0] = ((String)request.getParameter("sdate"));
-        query[1] = ((String)request.getParameter("edate"));
+        java.sql.Date startDate = java.sql.Date.valueOf(request.getParameter("sdate"));
+        java.sql.Date endDate = java.sql.Date.valueOf(request.getParameter("edate"));
+        int userID = -1;
         
         Cookie[] cookies = request.getCookies();
         
@@ -49,7 +53,7 @@ public class Availability extends HttpServlet {
                 {
                     if(cookie.getName().equals("user")) 
                     {
-                        query[2] = cookie.getValue();
+                        userID = Integer.parseInt(cookie.getValue());
                     }
        
                 }
@@ -57,10 +61,18 @@ public class Availability extends HttpServlet {
         
         String url = request.getHeader("referer");
         
-        if (url.equals("http://localhost:8080/UWE-ESD-2018-Assignment-war/Availability.jsp")){
-            
-            String str = String.format("UPDATE AVAILABILITY(STARTDATE, ENDDATE) VALUES ('%s','%s') WHERE DRIVERID = %s", query[0], query[1], query[2]);
+   
+        //check if availability exists
+        if (db.executeQuery(String.format("SELECT * FROM AVAILABILITY WHERE DRIVERID=%s", getForeignID(userID, "DRIVER"))).isEmpty()) {
+            String str = String.format("INSERT INTO AVAILABILITY(STARTDATE, ENDDATE, DRIVERID) VALUES(DATE('%s'), DATE('%s'), %s)", startDate, endDate, getForeignID(userID, "DRIVER"));
             db.executeUpdate(str);
+        }else{
+            String str = String.format("UPDATE AVAILABILITY SET STARTDATE=DATE('%s'), ENDDATE=DATE('%s') WHERE DRIVERID = %s", startDate, endDate, getForeignID(userID, "DRIVER"));
+            db.executeUpdate(str);
+        }
+            
+            
+            
             //int userid = db.getID(String.format("SELECT ID FROM USERS WHERE USERNAME='%s' AND PASSWORD='%s'", query[0], query[1]));
             //db.executeUpdate(String.format("INSERT INTO CUSTOMER(DRIVERID) VALUES (%d)", userid));
         
@@ -76,7 +88,7 @@ public class Availability extends HttpServlet {
             out.println("</body>");
             out.println("</html>");
         }
-    }
+    
 }
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -116,5 +128,12 @@ public class Availability extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+
+    private Integer getForeignID(int userID, java.lang.String table) {
+        // Note that the injected javax.xml.ws.Service reference as well as port objects are not thread safe.
+        // If the calling of port operations may lead to race condition some synchronization is required.
+        ws.AlphaCabWS port = service.getAlphaCabWSPort();
+        return port.getForeignID(userID, table);
+    }
 
 }

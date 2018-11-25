@@ -5,6 +5,10 @@
         <servlet-class>com.StartUp</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>Availability</servlet-name>
+        <servlet-class>pages.Availability</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>Turnover</servlet-name>
         <servlet-class>pages.Turnover</servlet-class>
     </servlet>
@@ -103,6 +107,10 @@
     <servlet-mapping>
         <servlet-name>ShowAvailableDrivers</servlet-name>
         <url-pattern>/ShowAvailableDrivers.do</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Availability</servlet-name>
+        <url-pattern>/Availability.do</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

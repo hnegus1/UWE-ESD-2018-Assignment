@@ -26,7 +26,7 @@
                   <input name="button" type="submit" value="Update Details"/>
         </form>
         <form method="POST"
-            action="placeholder">
+            action="ASTJ.do">
                   <input name="button" type="submit" value="Journey"/>
         </form>
         <form method="POST"
