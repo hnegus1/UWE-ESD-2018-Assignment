@@ -9,6 +9,10 @@
         <servlet-class>pages.Turnover</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>ASTJ</servlet-name>
+        <servlet-class>pages.ASTJ</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>Register</servlet-name>
         <servlet-class>pages.Register</servlet-class>
     </servlet>
@@ -43,6 +47,10 @@
     <servlet>
         <servlet-name>BookJourney</servlet-name>
         <servlet-class>pages.BookJourney</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ShowAvailableDrivers</servlet-name>
+        <servlet-class>pages.ShowAvailableDrivers</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>StartUp</servlet-name>
@@ -87,6 +95,14 @@
     <servlet-mapping>
         <servlet-name>Turnover</servlet-name>
         <url-pattern>/Turnover.do</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ASTJ</servlet-name>
+        <url-pattern>/ASTJ.do</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ShowAvailableDrivers</servlet-name>
+        <url-pattern>/ShowAvailableDrivers.do</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
