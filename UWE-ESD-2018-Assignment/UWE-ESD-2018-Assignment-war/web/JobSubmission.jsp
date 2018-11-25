@@ -14,7 +14,7 @@
     <body>
         <h1>Job Overview</h1>
         <p>Here is a list of all of the jobs that you have been assigned. To complete the job, just mark on the right and submit</p>
-        <form action="Complete.do">
+        <form action="JobSubmission.do">
             ${table}
             <button type=submit" name="submit" value="Submit">Mark as complete</button>
         </form>
