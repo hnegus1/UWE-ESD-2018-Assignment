@@ -5,6 +5,10 @@
         <servlet-class>com.StartUp</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>JobSubmission</servlet-name>
+        <servlet-class>pages.JobSubmission</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>Availability</servlet-name>
         <servlet-class>pages.Availability</servlet-class>
     </servlet>
@@ -119,6 +123,10 @@
     <servlet-mapping>
         <servlet-name>ExistingBookings</servlet-name>
         <url-pattern>/ExistingBookings</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>JobSubmission</servlet-name>
+        <url-pattern>/JobSubmission.do</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
