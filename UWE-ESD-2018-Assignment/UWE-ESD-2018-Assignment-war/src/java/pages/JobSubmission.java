@@ -34,20 +34,10 @@ public class JobSubmission extends HttpServlet {
         
         Database db = (Database) getServletContext().getAttribute("db");
         
-        String [] query = new String[3];
+        int journeyID = (Integer.parseInt(request.getParameter("ID")));
         
-        query[0] = ((String)request.getParameter("sdate"));
-        query[1] = ((String)request.getParameter("edate"));
-        
-        String url = request.getHeader("referer");
-        
-        if (url.equals("http://localhost:8080/UWE-ESD-2018-Assignment-war/Availability.jsp")){
-            
-            String str = String.format("UPDATE AVAILABILITY(STARTDATE, ENDDATE) VALUES ('%s','%s')", query[0], query[1], "customer");
-            db.executeUpdate(str);
-            int userid = db.getID(String.format("SELECT ID FROM USERS WHERE USERNAME='%s' AND PASSWORD='%s'", query[0], query[1]));
-            db.executeUpdate(String.format("INSERT INTO CUSTOMER(DRIVERID) VALUES (%d)", userid));
-        
+        db.executeUpdate(String.format("UPDATE JOURNEY SET COMPLETED=1 WHERE ID=%s", journeyID));
+       
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
@@ -56,13 +46,12 @@ public class JobSubmission extends HttpServlet {
             out.println("<title>Servlet JobSubmission</title>");            
             out.println("</head>");
             out.println("<body>");
-            //out.println(addlist("SELECT * FROM USERS * STATIC"));
-            out.println("<h1>Servlet JobSubmission at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Success!</h1>");
             out.println("</body>");
             out.println("</html>");
         }
     }
-}
+
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
