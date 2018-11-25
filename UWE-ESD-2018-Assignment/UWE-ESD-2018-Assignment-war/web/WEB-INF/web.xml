@@ -29,6 +29,10 @@
         <servlet-class>pages.CustomerBooking</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>ExistingBookings</servlet-name>
+        <servlet-class>pages.ExistingBookings</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>WebServiceExample</servlet-name>
         <servlet-class>com.WebServiceExample</servlet-class>
     </servlet>
@@ -111,6 +115,10 @@
     <servlet-mapping>
         <servlet-name>Availability</servlet-name>
         <url-pattern>/Availability.do</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ExistingBookings</servlet-name>
+        <url-pattern>/ExistingBookings</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

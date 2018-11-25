@@ -13,13 +13,13 @@
     </head>
     <body>
         <h1>Please choose the type of booking you wish to access:</h1>
-        
-        <a href="ExistingBooking.jsp">  <!-- Create a Button to link the Existing Booking page from choose booking -->
-        <button>Existing Booking</button>
-        </a>
+        <form method="POST"
+            action="ExistingBookings">
+                  <input name="button" type="submit" value="Existing Bookings"/>
+        </form>
         <br/>
-        <a href="BookingForm.jsp">  <!-- Create a Button to link the Booking From page from choose booking -->
-        <button>New Booking</button>
-        </a>
-    </body>
+        <form method="POST"
+              action="BookingForm.jsp">
+                  <input name="button" type="submit" value="Book new journey"/>
+        </form>
 </html>
