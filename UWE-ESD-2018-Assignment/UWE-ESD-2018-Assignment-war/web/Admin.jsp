@@ -22,7 +22,7 @@
                   <input name="button" type="submit" value="New Driver"/>
         </form>
         <form method="POST"
-            action="placeholder">
+            action="DisplayUsers.jsp">
                   <input name="button" type="submit" value="Update Details"/>
         </form>
         <form method="POST"

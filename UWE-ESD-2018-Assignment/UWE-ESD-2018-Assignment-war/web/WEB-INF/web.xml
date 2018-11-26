@@ -61,6 +61,18 @@
         <servlet-class>pages.BookJourney</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>DisplayUser</servlet-name>
+        <servlet-class>pages.DisplayUser</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeleteUser</servlet-name>
+        <servlet-class>pages.DeleteUser</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EditUser</servlet-name>
+        <servlet-class>pages.EditUser</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>ShowAvailableDrivers</servlet-name>
         <servlet-class>pages.ShowAvailableDrivers</servlet-class>
     </servlet>
@@ -127,6 +139,18 @@
     <servlet-mapping>
         <servlet-name>JobSubmission</servlet-name>
         <url-pattern>/JobSubmission.do</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DisplayUser</servlet-name>
+        <url-pattern>/DisplayUser.do</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteUser</servlet-name>
+        <url-pattern>/DeleteUser.do</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditUser</servlet-name>
+        <url-pattern>/EditUser.do</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

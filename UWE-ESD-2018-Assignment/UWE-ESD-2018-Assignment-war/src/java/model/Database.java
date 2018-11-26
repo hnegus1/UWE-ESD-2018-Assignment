@@ -75,6 +75,14 @@ public class Database implements ServletContextListener {
         }
     }
     
+    // Returns the resultset, making it easier to display db tables in jsp.
+    public ResultSet getResultSet(String sql) throws SQLException {
+        stmt = conn.createStatement();
+        ResultSet results = stmt.executeQuery(sql);
+        
+        return results;
+    }
+    
     //Mimics the functionality of executeUpdate
     public void executeUpdate(String sql){
         try{
