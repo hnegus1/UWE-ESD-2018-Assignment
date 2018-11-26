@@ -14,7 +14,7 @@
     <body>
         <h1>Welcome ${name}</h1>
         <form method="POST"
-            action="placeholder">
+            action="ASTJ.do">
                   <input name="button" type="submit" value="Assign Driver"/>
         </form>
         <form method="POST"
@@ -24,10 +24,6 @@
         <form method="POST"
             action="DisplayUsers.jsp">
                   <input name="button" type="submit" value="Update Details"/>
-        </form>
-        <form method="POST"
-            action="ASTJ.do">
-                  <input name="button" type="submit" value="Journey"/>
         </form>
         <form method="POST"
             action="TurnOver.jsp">
