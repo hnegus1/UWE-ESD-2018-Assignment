@@ -11,19 +11,13 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import javax.xml.ws.WebServiceRef;
 import model.Database;
-import ws.AlphaCabWS_Service;
 
 /**
  *
- * @author Nikolas
+ * @author h2-negus
  */
-public class ShowAvailableDrivers extends HttpServlet {
-
-    @WebServiceRef(wsdlLocation = "WEB-INF/wsdl/localhost_8080/AlphaCabWS/AlphaCabWS.wsdl")
-    private AlphaCabWS_Service service;
+public class AssignDriver extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -36,20 +30,27 @@ public class ShowAvailableDrivers extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        Database db = (Database) getServletContext().getAttribute("db");// CONNECTS TO THE DATABASE
-        String [] query = new String[1]; 
-        query[0] = (String)request.getParameter("ID");
+        response.setContentType("text/html;charset=UTF-8");
+        Database db = (Database) getServletContext().getAttribute("db");
         
-        java.sql.Date departureDate = java.sql.Date.valueOf((String)db.executeQuery(String.format("SELECT DEPARTUREDATE FROM JOURNEY WHERE ID=%s",query[0])).get(0).get(0));
-        System.out.println("");
+        int driverID = Integer.parseInt(request.getParameter("ID"));
+        int journeyID = Integer.parseInt(request.getParameter("JourneyID"));
         
+        String qry = String.format("UPDATE JOURNEY SET DRIVERID=%s WHERE ID=%s", driverID, journeyID);
+        db.executeUpdate(qry);
         
-        //String qry=String.format("SELECT DRIVERID FROM AVAILABILITY WHERE %s BETWEEN STARTDATE AND ENDDATE ", departureDate);
-        HttpSession session = request.getSession(true);
-        session.setAttribute("table",addList(String.format("SELECT * FROM AVAILABILITY WHERE STARTDATE<DATE('%s') AND ENDDATE>DATE('%s')",departureDate, departureDate),"RADIO"));
-        session.setAttribute("journeyID", query[0]);
-        response.sendRedirect("DriverSelection.jsp");//those re send to the jsp to be displayed there
-      
+        try (PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet AssignDriver</title>");            
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Success!</h1>");
+            out.println("</body>");
+            out.println("</html>");
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -90,12 +91,5 @@ public class ShowAvailableDrivers extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-
-    private String addList(java.lang.String sql, java.lang.String type) {
-        // Note that the injected javax.xml.ws.Service reference as well as port objects are not thread safe.
-        // If the calling of port operations may lead to race condition some synchronization is required.
-        ws.AlphaCabWS port = service.getAlphaCabWSPort();
-        return port.addList(sql, type);
-    }
 
 }

@@ -12,9 +12,10 @@
         <title>Driver Selection</title>
     </head>
     <body>
-        <form>
+        <form action="AssignDriver.do">
             ${table}
-              <button type="submit"name="submit"value="submit">register driver</button>
+            <input type="hidden" name="JourneyID" value="${journeyID}">
+            <button type="submit"name="submit"value="submit">Select Driver</button>
         </form>
     </body>
 </html>

@@ -14,7 +14,7 @@
     <body>
         <h1>Please choose the type of booking you wish to access:</h1>
         <form method="POST"
-            action="ExistingBookings">
+            action="ExistingBookings.do">
                   <input name="button" type="submit" value="Existing Bookings"/>
         </form>
         <br/>
