@@ -22,4 +22,9 @@
               action="BookingForm.jsp">
                   <input name="button" type="submit" value="Book new journey"/>
         </form>
+        <br/>
+        <form method="POST"
+              action="CompletedBookings.do">
+                  <input name="button" type="submit" value="Completed Journeys"/>
+        </form>
 </html>

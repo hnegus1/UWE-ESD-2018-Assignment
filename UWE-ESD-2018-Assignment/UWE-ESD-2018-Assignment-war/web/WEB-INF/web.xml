@@ -84,6 +84,14 @@
         <servlet-name>DeleteJourney</servlet-name>
         <servlet-class>pages.DeleteJourney</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>CompletedBooking</servlet-name>
+        <servlet-class>pages.CompletedBookings</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DisplayInvoice</servlet-name>
+        <servlet-class>pages.DisplayInvoice</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>StartUp</servlet-name>
         <url-pattern>/MainMenu</url-pattern>
@@ -167,6 +175,14 @@
     <servlet-mapping>
         <servlet-name>DeleteJourney</servlet-name>
         <url-pattern>/DeleteJourney.do</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CompletedBooking</servlet-name>
+        <url-pattern>/CompletedBookings.do</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DisplayInvoice</servlet-name>
+        <url-pattern>/DisplayInvoice.do</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
