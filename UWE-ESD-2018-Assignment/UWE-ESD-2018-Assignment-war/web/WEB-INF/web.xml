@@ -80,6 +80,10 @@
         <servlet-name>AssignDriver</servlet-name>
         <servlet-class>pages.AssignDriverToJourney</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>DeleteJourney</servlet-name>
+        <servlet-class>pages.DeleteJourney</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>StartUp</servlet-name>
         <url-pattern>/MainMenu</url-pattern>
@@ -159,6 +163,10 @@
     <servlet-mapping>
         <servlet-name>AssignDriver</servlet-name>
         <url-pattern>/AssignDriver.do</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteJourney</servlet-name>
+        <url-pattern>/DeleteJourney.do</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -46,7 +46,7 @@ public class ShowExistingBookings extends HttpServlet{
         }
             
         customerID = getForeignID(userID, "CUSTOMER");
-        session.setAttribute("table", addList("SELECT ORIGIN, DESTINATION, PRICE, DEPARTURETIME, DEPARTUREDATE FROM JOURNEY WHERE COMPLETED=0 AND CUSTOMERID=" + customerID, "RADIO"));
+        session.setAttribute("table", addList("SELECT ID, ORIGIN, DESTINATION, PRICE, DEPARTURETIME, DEPARTUREDATE FROM JOURNEY WHERE COMPLETED=0 AND CUSTOMERID=" + customerID, "RADIO"));
         //session.setAttribute("table", addList("SELECT * FROM JOURNEY WHERE COMPLETED=0 AND CUSTOMERID=" + customerID, "RADIO"));
         response.sendRedirect("ViewJourneys.jsp");
 }

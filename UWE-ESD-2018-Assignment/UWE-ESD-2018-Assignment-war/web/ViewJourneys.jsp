@@ -12,8 +12,12 @@
         <title>View Bookings</title>
     </head>
     <body>
-        <h1>Job Overview</h1>
+        <h1>Journey Overview</h1>
         <p>Here is a list of all the bookings you have made!</p>
-        ${table}
+        <br/>
+        <form method="POST" action="DeleteJourney.do">
+            ${table}
+            <input name="button" type="submit" value="Delete Booking"/>
+        </form>
     </body>   
 </html>
