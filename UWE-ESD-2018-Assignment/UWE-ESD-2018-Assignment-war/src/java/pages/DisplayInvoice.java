@@ -39,7 +39,11 @@ public class DisplayInvoice extends HttpServlet {
         
         String qry = String.format("SELECT PRICE, ORIGIN, DESTINATION FROM JOURNEY WHERE ID=%s", ID);
         ArrayList<ArrayList> results = db.executeQuery(qry);
+        double price = Double.parseDouble(String.valueOf(results.get(0).get(0)));
+        double vat = price + price * 0.2;
         
+        
+        request.setAttribute("vat", vat);
         request.setAttribute("price", results.get(0).get(0));
         request.setAttribute("origin", results.get(0).get(1));
         request.setAttribute("destination", results.get(0).get(2));
