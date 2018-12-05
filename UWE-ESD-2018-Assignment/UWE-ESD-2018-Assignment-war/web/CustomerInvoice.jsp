@@ -31,6 +31,8 @@
                 <br/>
                 <p>This is how much it cost you: £${price}0</p>
                 <br/>
+                <p>This is how much it cost you (including vat): £${vat}0</p>
+                <br/>
             </div>
          </div>
     </body>
