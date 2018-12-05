@@ -63,8 +63,9 @@ public class AlphaCabWS {
         switch(type){
             case "STATIC":
                 try{
-                    sb.append("<table>");
+                    sb.append("<table class='table'>");
                     //get column names and add to the table
+                    sb.append("<thead>");
                     sb.append("<tr>");
                     for (int col = 1; col < rsmd.getColumnCount() + 1; col++) {
                         sb.append("<th>");
@@ -72,6 +73,7 @@ public class AlphaCabWS {
                         sb.append("</th>");
                     }
                     sb.append("</tr>");
+                    sb.append("</thead>");
                     
                     while(results.next()){
                         sb.append("<tr>");
@@ -90,8 +92,9 @@ public class AlphaCabWS {
                 break;
             case "RADIO":
                 try{
-                    sb.append("<table>");
+                    sb.append("<table class='table'>");
                     //get column names and add to the table
+                    sb.append("<thead>");
                     sb.append("<tr>");
                     for (int col = 1; col < rsmd.getColumnCount() + 1; col++) {
                         sb.append("<th>");
@@ -100,6 +103,7 @@ public class AlphaCabWS {
                     }
                     sb.append("<th>SELECTED</th>");
                     sb.append("</tr>");
+                    sb.append("</thead>");
                     
                     while(results.next()){
                         int row = 0;

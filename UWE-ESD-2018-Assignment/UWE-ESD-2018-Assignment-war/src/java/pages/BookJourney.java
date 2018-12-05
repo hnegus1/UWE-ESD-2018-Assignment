@@ -48,7 +48,7 @@ public class BookJourney extends HttpServlet {
             paid=1;
         }
         
-        String update = "INSERT INTO JOURNEY(ORIGIN, DESTINATION, CUSTOMERID, DEPARTURETIME, DEPARTUREDATE, DISTANCE, PRICE) VALUES ('" + origin + "','" + destination + "'," + customerID + ",TIME('" + time + "'), DATE('" + date + "')," + distance + "," + price + ")";  
+        String update = "INSERT INTO JOURNEY(ORIGIN, DESTINATION, CUSTOMERID, DEPARTURETIME, DEPARTUREDATE, DISTANCE, PRICE, PAID) VALUES ('" + origin + "','" + destination + "'," + customerID + ",TIME('" + time + "'), DATE('" + date + "')," + distance + "," + price + "," + paid + ")";  
         db.executeUpdate(update);
         
         try (PrintWriter out = response.getWriter()) {

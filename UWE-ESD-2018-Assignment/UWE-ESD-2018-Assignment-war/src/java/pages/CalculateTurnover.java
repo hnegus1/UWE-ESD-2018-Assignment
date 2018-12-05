@@ -49,6 +49,8 @@ public class CalculateTurnover extends HttpServlet {
             out.println("<html>");
             out.println("<head>");               // when the admin presses calculate the new page pops
             out.println("<title>Welcome screen</title>");   //        out with the total SUM within those dates
+            out.println("<link rel=\"stylesheet\" href=\"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css\">");
+            out.println("<link rel=\"stylesheet\" type=\"text/css\" href=\"style.css\">");
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Turnover</h1>");

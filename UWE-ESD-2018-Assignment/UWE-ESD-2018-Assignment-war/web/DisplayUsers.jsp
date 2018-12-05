@@ -17,11 +17,21 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Edit User</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="style.css">
     </head>
     <body>
-        <h1>Users</h1>
+        
+        <nav class="navbar navbar-static-top">
+            <div class="container">
+                <div class="row" style="text-align: center">           
+                    <h1>Edit Users</h1>
+                </div>
+            </div>
+        </nav> 
         <form method="post" action="DisplayUser.do">
-            <table border="2">
+            <table class="table">
+                <thead>
                 <tr>
                     <td>ID</td>
                     <td>User Name</td>
@@ -29,6 +39,7 @@
                     <td>User Type</td>
                     <td>Select</td>
                 </tr>
+                </thead>
                 <% 
                     Database db = (Database) getServletContext().getAttribute("db");
                     ResultSet results = db.getResultSet("SELECT * FROM USERS");
@@ -47,7 +58,7 @@
                     results.close();
                 %>
             </table>
-            <input type="submit" value="Edit User"/>
+            <button class="btn" type="submit" value="Edit User">Edit User</button>
         </form>
     </body>
 </html>

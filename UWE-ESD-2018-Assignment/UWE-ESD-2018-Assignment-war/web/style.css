@@ -1,0 +1,43 @@
+body{
+    background-color:#262626;
+}       
+h1{
+    color:white;
+}
+button{
+    background-color:#b26a27;
+    color:white;
+}
+nav{
+    background-color: #b26a27;
+}
+input[type=text]{
+    background-color: #262626;
+    color: white;
+    border: 2px solid white;
+}
+input[type=password]{
+    background-color: #262626;
+    color: white;
+    border: 2px solid white;
+}
+
+input[type=date]{
+    background-color: #262626;
+    color: white;
+    border: 2px solid white;
+}
+
+input[type=time]{
+    background-color: #262626;
+    color: white;
+    border: 2px solid white;
+}
+
+p{
+    color:#cecece;
+}
+
+tr{
+    color:#cecece;
+}

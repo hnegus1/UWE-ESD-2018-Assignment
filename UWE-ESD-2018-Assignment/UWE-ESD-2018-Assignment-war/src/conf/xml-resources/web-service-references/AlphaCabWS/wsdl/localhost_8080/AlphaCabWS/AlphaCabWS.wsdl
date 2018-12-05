@@ -10,18 +10,6 @@
 <message name="addListResponse">
 <part name="parameters" element="tns:addListResponse"/>
 </message>
-<message name="showError">
-<part name="parameters" element="tns:showError"/>
-</message>
-<message name="showErrorResponse">
-<part name="parameters" element="tns:showErrorResponse"/>
-</message>
-<message name="getForeignID">
-<part name="parameters" element="tns:getForeignID"/>
-</message>
-<message name="getForeignIDResponse">
-<part name="parameters" element="tns:getForeignIDResponse"/>
-</message>
 <message name="googleMapsDistance">
 <part name="parameters" element="tns:googleMapsDistance"/>
 </message>
@@ -34,10 +22,28 @@
 <message name="IOException">
 <part name="fault" element="tns:IOException"/>
 </message>
+<message name="showError">
+<part name="parameters" element="tns:showError"/>
+</message>
+<message name="showErrorResponse">
+<part name="parameters" element="tns:showErrorResponse"/>
+</message>
+<message name="getForeignID">
+<part name="parameters" element="tns:getForeignID"/>
+</message>
+<message name="getForeignIDResponse">
+<part name="parameters" element="tns:getForeignIDResponse"/>
+</message>
 <portType name="AlphaCabWS">
 <operation name="addList">
 <input wsam:Action="http://ws/AlphaCabWS/addListRequest" message="tns:addList"/>
 <output wsam:Action="http://ws/AlphaCabWS/addListResponse" message="tns:addListResponse"/>
+</operation>
+<operation name="googleMapsDistance">
+<input wsam:Action="http://ws/AlphaCabWS/googleMapsDistanceRequest" message="tns:googleMapsDistance"/>
+<output wsam:Action="http://ws/AlphaCabWS/googleMapsDistanceResponse" message="tns:googleMapsDistanceResponse"/>
+<fault message="tns:ProtocolException" name="ProtocolException" wsam:Action="http://ws/AlphaCabWS/googleMapsDistance/Fault/ProtocolException"/>
+<fault message="tns:IOException" name="IOException" wsam:Action="http://ws/AlphaCabWS/googleMapsDistance/Fault/IOException"/>
 </operation>
 <operation name="showError">
 <input wsam:Action="http://ws/AlphaCabWS/showErrorRequest" message="tns:showError"/>
@@ -47,34 +53,10 @@
 <input wsam:Action="http://ws/AlphaCabWS/getForeignIDRequest" message="tns:getForeignID"/>
 <output wsam:Action="http://ws/AlphaCabWS/getForeignIDResponse" message="tns:getForeignIDResponse"/>
 </operation>
-<operation name="googleMapsDistance">
-<input wsam:Action="http://ws/AlphaCabWS/googleMapsDistanceRequest" message="tns:googleMapsDistance"/>
-<output wsam:Action="http://ws/AlphaCabWS/googleMapsDistanceResponse" message="tns:googleMapsDistanceResponse"/>
-<fault message="tns:ProtocolException" name="ProtocolException" wsam:Action="http://ws/AlphaCabWS/googleMapsDistance/Fault/ProtocolException"/>
-<fault message="tns:IOException" name="IOException" wsam:Action="http://ws/AlphaCabWS/googleMapsDistance/Fault/IOException"/>
-</operation>
 </portType>
 <binding name="AlphaCabWSPortBinding" type="tns:AlphaCabWS">
 <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
 <operation name="addList">
-<soap:operation soapAction=""/>
-<input>
-<soap:body use="literal"/>
-</input>
-<output>
-<soap:body use="literal"/>
-</output>
-</operation>
-<operation name="showError">
-<soap:operation soapAction=""/>
-<input>
-<soap:body use="literal"/>
-</input>
-<output>
-<soap:body use="literal"/>
-</output>
-</operation>
-<operation name="getForeignID">
 <soap:operation soapAction=""/>
 <input>
 <soap:body use="literal"/>
@@ -97,6 +79,24 @@
 <fault name="IOException">
 <soap:fault name="IOException" use="literal"/>
 </fault>
+</operation>
+<operation name="showError">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
+<operation name="getForeignID">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
 </operation>
 </binding>
 <service name="AlphaCabWS">

@@ -10,21 +10,32 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Driver Page</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="style.css">
     </head>
     <body>
-        <h1>Welcome ${name}</h1>
-        <form method="POST"
-            action="Availability.jsp">
-                  <input name="button" type="submit" value="Availability"/>
-        </form>
-        <form method="POST"
-            action="JobList">
-                  <input name="button" type="submit" value="Transport"/>
-        </form>
-        <br/>
-        <form method="POST"
-              action="login.jsp">
-                  <input name="button" type="submit" value="Logout"/>
-        </form>
+        <nav class="navbar navbar-static-top">
+            <div class="container">
+                <div class="row" style="text-align: center">
+                    <h1>Welcome ${name}</h1>
+                </div>
+            </div>
+        </nav> 
+        <div class="container">       
+            <div class="row">       
+                <form method="POST" action="Availability.jsp">
+                    <button  class="btn"name="button" type="submit" value="Availability">Availability</button>
+                </form>
+                <br>
+                <form method="POST" action="JobList">
+                          <button class="btn" name="button" type="submit" value="Transport">Assigned Jobs</button>
+                </form>
+                <br/>
+                <br>
+                <form method="POST" action="login.jsp">
+                          <button class="btn" name="button" type="submit" value="Logout">Logout</button>
+                </form>
+            </div>
+        </div>               
     </body>
 </html>
