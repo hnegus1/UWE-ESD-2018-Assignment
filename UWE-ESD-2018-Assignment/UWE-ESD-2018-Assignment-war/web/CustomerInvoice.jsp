@@ -19,7 +19,7 @@
         <br/>
         <p>This is where you went to: ${destination}</p>
         <br/>
-        <p>This is how much it cost you: ${price}</p>
+        <p>This is how much it cost you: £${price}0</p>
         <br/>
     </body>
 </html>
