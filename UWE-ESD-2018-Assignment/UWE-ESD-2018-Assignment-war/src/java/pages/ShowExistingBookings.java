@@ -18,7 +18,7 @@ import ws.AlphaCabWS_Service;
  *
  * @author Isaac
  */
-public class ExistingBookings extends HttpServlet{
+public class ShowExistingBookings extends HttpServlet{
     
     @WebServiceRef(wsdlLocation = "WEB-INF/wsdl/localhost_8080/AlphaCabWS/AlphaCabWS.wsdl")
     private AlphaCabWS_Service service;

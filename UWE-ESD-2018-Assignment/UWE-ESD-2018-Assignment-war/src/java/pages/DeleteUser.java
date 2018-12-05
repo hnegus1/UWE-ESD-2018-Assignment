@@ -42,10 +42,11 @@ public class DeleteUser extends HttpServlet {
         int getIDValue = Integer.parseInt(ID);
         String userType = request.getParameter("TYPE");
         
-        String qry = String.format("DELETE FROM USERS WHERE ID=%d", getIDValue);
+        String qry = String.format("DELETE FROM %s WHERE userid=%s", userType, getIDValue);
         db.executeUpdate(qry);
-        qry = String.format("DELETE FROM %s WHERE userid=%d", userType, getIDValue);
+        qry = String.format("DELETE FROM USERS WHERE ID=%s", getIDValue);
         db.executeUpdate(qry);
+
         
         request.getRequestDispatcher("DisplayUsers.jsp").forward(request, response); 
     }

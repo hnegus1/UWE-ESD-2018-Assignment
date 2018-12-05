@@ -6,35 +6,35 @@
     </servlet>
     <servlet>
         <servlet-name>JobSubmission</servlet-name>
-        <servlet-class>pages.JobSubmission</servlet-class>
+        <servlet-class>pages.CompleteJob</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>Availability</servlet-name>
-        <servlet-class>pages.Availability</servlet-class>
+        <servlet-class>pages.UpdateAvailability</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>Turnover</servlet-name>
-        <servlet-class>pages.Turnover</servlet-class>
+        <servlet-class>pages.CalculateTurnover</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>ASTJ</servlet-name>
-        <servlet-class>pages.ASTJ</servlet-class>
+        <servlet-class>pages.ShowJourneysToAssign</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>Register</servlet-name>
-        <servlet-class>pages.Register</servlet-class>
+        <servlet-class>pages.RegisterUser</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>Login</servlet-name>
-        <servlet-class>pages.Login</servlet-class>
+        <servlet-class>pages.LoginUser</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>CustomerBooking</servlet-name>
-        <servlet-class>pages.CustomerBooking</servlet-class>
+        <servlet-class>pages.ProcessBooking</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>ExistingBookings</servlet-name>
-        <servlet-class>pages.ExistingBookings</servlet-class>
+        <servlet-class>pages.ShowExistingBookings</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>WebServiceExample</servlet-name>
@@ -54,7 +54,7 @@
     </servlet>
     <servlet>
         <servlet-name>JobList</servlet-name>
-        <servlet-class>pages.JobList</servlet-class>
+        <servlet-class>pages.ShowJobsForDriver</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>BookJourney</servlet-name>
@@ -62,7 +62,7 @@
     </servlet>
     <servlet>
         <servlet-name>DisplayUser</servlet-name>
-        <servlet-class>pages.DisplayUser</servlet-class>
+        <servlet-class>pages.DisplayUserToEdit</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>DeleteUser</servlet-name>
@@ -78,7 +78,7 @@
     </servlet>
     <servlet>
         <servlet-name>AssignDriver</servlet-name>
-        <servlet-class>pages.AssignDriver</servlet-class>
+        <servlet-class>pages.AssignDriverToJourney</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>StartUp</servlet-name>
@@ -162,7 +162,7 @@
     </servlet-mapping>
     <session-config>
         <session-timeout>
-            30
+            20
         </session-timeout>
     </session-config>
 </web-app>

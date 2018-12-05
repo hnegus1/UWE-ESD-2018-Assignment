@@ -6,7 +6,6 @@
 package pages;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
@@ -20,7 +19,7 @@ import ws.AlphaCabWS_Service;
  *
  * @author Harry
  */
-public class JobList extends HttpServlet {
+public class ShowJobsForDriver extends HttpServlet {
 
     @WebServiceRef(wsdlLocation = "WEB-INF/wsdl/localhost_8080/AlphaCabWS/AlphaCabWS.wsdl")
     private AlphaCabWS_Service service;

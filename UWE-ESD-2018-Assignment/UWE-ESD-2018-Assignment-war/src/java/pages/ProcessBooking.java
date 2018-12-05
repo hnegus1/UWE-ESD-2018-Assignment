@@ -25,7 +25,7 @@ import ws.ProtocolException_Exception;
  *
  * @author Isaac
  */
-public class CustomerBooking extends HttpServlet {
+public class ProcessBooking extends HttpServlet {
 
     @WebServiceRef(wsdlLocation = "WEB-INF/wsdl/localhost_8080/AlphaCabWS/AlphaCabWS.wsdl")
     private AlphaCabWS_Service service;
@@ -62,15 +62,19 @@ public class CustomerBooking extends HttpServlet {
             }
             if (!usrFound) {
                 try (PrintWriter out = response.getWriter()) {
-                    /* TODO output your page here. You may use following sample code. */
                     out.println(showError("Invalid Session! You've probably broken something. Please login and try again."));
                 }
             }else{//session is valid
                 int customerID = getForeignID(userID, "CUSTOMER");
                 String distance = googleMapsDistance(origin, destination);
+                if (distance.equals("NOT_FOUND")){
+                    try (PrintWriter out = response.getWriter()) {
+                    out.println(showError("Invalid Origin/Destination! Please try again!"));
+                    }
+                }else{
                 distance = distance.replaceAll("[^\\.0123456789]","");
                 double price = (Double.parseDouble(distance) * 4);//arbitrarily chosen
-                
+                    
                 session.setAttribute("origin", origin);
                 session.setAttribute("destination", destination);
                 session.setAttribute("date", date.toString());
@@ -81,6 +85,7 @@ public class CustomerBooking extends HttpServlet {
                 
                        
                 request.getRequestDispatcher("BookingConfirm.jsp").forward(request, response);
+                }         
             }
         }
 

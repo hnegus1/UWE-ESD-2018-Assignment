@@ -168,13 +168,13 @@ public class AlphaCabWS {
         String definitelyNotAnAPIKey = "AIzaSyAi3G7IlxfDOt9xMycDOq5TKxWi5FvEhUc"; //oc do not steal 
         String url_string = "https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins=" + origin + "&destinations=" + destination +"&key=" + definitelyNotAnAPIKey;
         url_string = url_string.replace(" ", "");
-        
+
         URL url = new URL(url_string);
         System.out.println(url);
         HttpURLConnection con = (HttpURLConnection) url.openConnection();
         con.setRequestMethod("GET");
         con.connect();
-        
+
         BufferedReader in = new BufferedReader(
         new InputStreamReader(con.getInputStream()));
         String inputLine;
@@ -186,6 +186,9 @@ public class AlphaCabWS {
         con.disconnect();
         
         JsonObject jsonObject = new JsonParser().parse(content.toString()).getAsJsonObject();
+        
+        if (jsonObject.getAsJsonArray("rows").get(0).getAsJsonObject().get("elements").getAsJsonArray().get(0).getAsJsonObject().get("status").getAsString().equals("NOT_FOUND"))
+            return "NOT_FOUND";
                
         String distance = jsonObject.getAsJsonArray("rows").get(0).getAsJsonObject().get("elements").getAsJsonArray().get(0).getAsJsonObject().get("distance").getAsJsonObject().get("text").getAsString();
         return distance;

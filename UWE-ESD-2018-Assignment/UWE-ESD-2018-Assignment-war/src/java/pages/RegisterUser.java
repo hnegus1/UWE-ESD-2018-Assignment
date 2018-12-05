@@ -12,7 +12,7 @@ import model.Database;
  *
  * @author Tom Pugh
  */
-public class Register extends HttpServlet {
+public class RegisterUser extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>

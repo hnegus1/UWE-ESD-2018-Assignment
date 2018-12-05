@@ -7,7 +7,9 @@ package pages;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -15,9 +17,10 @@ import model.Database;
 
 /**
  *
- * @author h2-negus
+ * @author Nikolas
  */
-public class AssignDriver extends HttpServlet {
+@WebServlet(name = "Turnover", urlPatterns = {"/Turnover"})
+public class CalculateTurnover extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -30,28 +33,40 @@ public class AssignDriver extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        Database db = (Database) getServletContext().getAttribute("db");
+        Database db = (Database) getServletContext().getAttribute("db");// CONNECTS TO THE DATABASE
+        String [] query = new String[2]; // create a string queries for the 2 dates you wanna check if u were paid
+        query[0] = (String)request.getParameter("StartDate"); // takes the first date input 
+        query[1] = (String)request.getParameter("EndDate"); /// takes the second date inout
         
-        int driverID = Integer.parseInt(request.getParameter("ID"));
-        int journeyID = Integer.parseInt(request.getParameter("JourneyID"));
-        
-        String qry = String.format("UPDATE JOURNEY SET DRIVERID=%s WHERE ID=%s", driverID, journeyID);
-        db.executeUpdate(qry);
+        String qry=String.format("SELECT SUM(PRICE) FROM JOURNEY WHERE  DEPARTUREDATE BETWEEN DATE('%s') AND DATE('%s') AND PAID=1", query[0],query[1]);
+        //The SUM() function returns the total sum of a numeric column. So we choose the price column from the Journey databsae
+        //where the Date is between the admins choice and where they were actually paid 
+        ArrayList<ArrayList> results = db.executeQuery(qry);
         
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
             out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet AssignDriver</title>");            
+            out.println("<head>");               // when the admin presses calculate the new page pops
+            out.println("<title>Welcome screen</title>");   //        out with the total SUM within those dates
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Success!</h1>");
+            out.println("<h1>Turnover</h1>");
+            out.println("<p>Turnover was " + results.get(0).get(0) + "</p>");
             out.println("</body>");
             out.println("</html>");
         }
-    }
+        /// the code below no longer works BUT it was the original idea of choosing everything and adding them
+//        String qry = String.format("SELECT PRICE FROM JOURNEY WHERE PAID='1'");//slect price from journey table where they did pay
+//        ArrayList<ArrayList> results = db.executeQuery(qry);//gets the results  as an array
+//        int counter=0; // a variable used for  counting the solution
+//        double sum=0.0;
+//        for (counter=0;counter<results.size();counter++){ //loop al long as there solution  in the results
+//            sum+= Double.parseDouble((String)results.get(counter).get(0));// and add ther values to sum once u convert em to double
+//          
+//             }//end of for 
+        
+        }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -93,3 +108,6 @@ public class AssignDriver extends HttpServlet {
     }// </editor-fold>
 
 }
+
+
+ 

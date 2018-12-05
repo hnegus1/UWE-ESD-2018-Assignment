@@ -18,7 +18,7 @@ import model.Database;
  *
  * @author Tom Pugh
  */
-public class DisplayUser extends HttpServlet {
+public class DisplayUserToEdit extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
