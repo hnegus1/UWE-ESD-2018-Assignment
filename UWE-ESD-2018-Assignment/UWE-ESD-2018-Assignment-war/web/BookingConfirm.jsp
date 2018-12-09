@@ -23,7 +23,7 @@
         </nav> 
         <div class="container">       
             <div class="row"> 
-                <p>The journey from ${origin} to ${destination} will be ${distance} miles and will cost £${price}.</p>
+                <p>The journey from ${origin} to ${destination} will be ${distance} miles and will cost £${price} or £${vat} including VAT.</p>
                 <form method="POST" action="BookJourney.do">
                     <div class="form-check form-check-inline">
                         <label class="form-check-label"><p>Check if paying by card:</p></label>

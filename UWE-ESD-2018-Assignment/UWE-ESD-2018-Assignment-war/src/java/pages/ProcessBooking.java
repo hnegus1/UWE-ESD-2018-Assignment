@@ -8,19 +8,16 @@ package pages;
 import model.Database;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.Date;
-import java.util.ArrayList;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.sql.ResultSet;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpSession;
 import javax.xml.ws.WebServiceRef;
 import ws.AlphaCabWS_Service;
-import ws.IOException_Exception;
-import ws.ProtocolException_Exception;
 /**
  *
  * @author Isaac
@@ -87,8 +84,14 @@ public class ProcessBooking extends HttpServlet {
                     rate = 6;
                 }else{
                     rate = 7;
-                }
+                }               
                 price = numericalDistance * rate;
+                //round
+                BigDecimal bd = new BigDecimal(price);
+                bd = bd.setScale(2, RoundingMode.HALF_UP);
+                price = bd.doubleValue();
+                double vat = new BigDecimal(price * 1.20).setScale(2, RoundingMode.HALF_UP).doubleValue();
+                
                  
                 session.setAttribute("origin", origin);
                 session.setAttribute("destination", destination);
@@ -97,6 +100,7 @@ public class ProcessBooking extends HttpServlet {
                 session.setAttribute("customerID", customerID);
                 session.setAttribute("distance", distance);
                 session.setAttribute("price", price);
+                session.setAttribute("vat", vat);
                 
                        
                 request.getRequestDispatcher("BookingConfirm.jsp").forward(request, response);

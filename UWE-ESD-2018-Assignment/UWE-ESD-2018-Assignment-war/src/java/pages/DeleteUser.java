@@ -12,13 +12,18 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.xml.ws.WebServiceRef;
 import model.Database;
+import ws.AlphaCabWS_Service;
 
 /**
  *
  * @author Tom Pugh
  */
 public class DeleteUser extends HttpServlet {
+
+    @WebServiceRef(wsdlLocation = "WEB-INF/wsdl/localhost_8080/AlphaCabWS/AlphaCabWS.wsdl")
+    private AlphaCabWS_Service service;
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -34,19 +39,32 @@ public class DeleteUser extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         
         // Takes user ID from previous page and uses it to delete the user from
-        // relevant tables. May not be fully complete also may not work 100% for
-        // unknown reasons. User not always removed from users table.
+        // relevant tables. 
         
         Database db = (Database) getServletContext().getAttribute("db");
-        String ID = request.getParameter("ID");
-        int getIDValue = Integer.parseInt(ID);
+        String id = request.getParameter("ID");
+        int foreignID;
+        int getIDValue = Integer.parseInt(id);
         String userType = request.getParameter("TYPE");
         
-        String qry = String.format("DELETE FROM %s WHERE userid=%s", userType, getIDValue);
+        String idType;
+        if (userType == "customer"){
+            idType = "customerID";
+            foreignID = getForeignID(getIDValue, "CUSTOMER");
+        }else{
+            idType = "driverID";
+            foreignID = getForeignID(getIDValue, "DRIVER");
+        }
+            
+        //To avoid foreign key conflicts, the records that reference the user ID must also be removed
+        //To prevent this from happening, a system that was not created literally before I was born could be used.
+        String qry = String.format("DELETE FROM JOURNEY WHERE %s=%s", idType, foreignID);
+        db.executeUpdate(qry);
+        qry = String.format("DELETE FROM %s WHERE userid=%s", userType, getIDValue);
         db.executeUpdate(qry);
         qry = String.format("DELETE FROM USERS WHERE ID=%s", getIDValue);
         db.executeUpdate(qry);
-
+        
         
         request.getRequestDispatcher("DisplayUsers.jsp").forward(request, response); 
     }
@@ -89,5 +107,12 @@ public class DeleteUser extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+
+    private Integer getForeignID(int userID, java.lang.String table) {
+        // Note that the injected javax.xml.ws.Service reference as well as port objects are not thread safe.
+        // If the calling of port operations may lead to race condition some synchronization is required.
+        ws.AlphaCabWS port = service.getAlphaCabWSPort();
+        return port.getForeignID(userID, table);
+    }
 
 }
