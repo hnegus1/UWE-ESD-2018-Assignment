@@ -11,6 +11,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import model.Database;
 
 /**
@@ -39,18 +40,8 @@ public class AssignDriverToJourney extends HttpServlet {
         String qry = String.format("UPDATE JOURNEY SET DRIVERID=%s WHERE ID=%s", driverID, journeyID);
         db.executeUpdate(qry);
         
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet AssignDriver</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Success!</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }
+        request.getRequestDispatcher("Admin.jsp").forward(request, response);
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

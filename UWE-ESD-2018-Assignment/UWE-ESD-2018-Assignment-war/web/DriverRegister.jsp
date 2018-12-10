@@ -42,6 +42,10 @@
 
                     <button class="btn" type="submit" value="Register">Register</button>
                 </form>
+                <br>
+                <form method="POST" action="Admin.jsp">
+                          <button class="btn" name="button" type="submit" value="Back">Back</button>
+                </form>
             </div>
         </div>
     </body>

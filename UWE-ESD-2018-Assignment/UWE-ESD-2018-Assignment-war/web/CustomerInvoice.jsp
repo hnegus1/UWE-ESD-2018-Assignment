@@ -33,6 +33,9 @@
                 <br/>
                 <p>This is how much it cost you (including vat): £${vat}0</p>
                 <br/>
+                <form method="POST" action="ChooseCustomerBooking.jsp">
+                          <button class="btn" name="button" type="submit" value="Back">Back</button>
+                </form>
             </div>
          </div>
     </body>

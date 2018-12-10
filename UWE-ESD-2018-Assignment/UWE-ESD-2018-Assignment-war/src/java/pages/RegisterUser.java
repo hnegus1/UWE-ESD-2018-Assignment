@@ -6,6 +6,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import model.Database;
 
 /**
@@ -41,27 +42,20 @@ public class RegisterUser extends HttpServlet {
             db.executeUpdate(str);
             int userid = db.getID(String.format("SELECT ID FROM USERS WHERE USERNAME='%s' AND PASSWORD='%s'", query[0], query[1]));
             db.executeUpdate(String.format("INSERT INTO CUSTOMER(ADDRESS, USERID) VALUES ('%s',%d)", query[2], userid));
+            HttpSession session = request.getSession(true);
+            session.setAttribute("message", "Thank you for registering");
+            request.getRequestDispatcher("MainMenu.jsp").forward(request, response);
         }
         else if (url.equals("http://localhost:8080/UWE-ESD-2018-Assignment-war/DriverRegister.jsp")) {
             String str = String.format("INSERT INTO USERS(USERNAME, PASSWORD, USERTYPE) VALUES ('%s','%s','%s')", query[0], query[1], "driver");
             db.executeUpdate(str);
             int userid = db.getID(String.format("SELECT ID FROM USERS WHERE USERNAME='%s' AND PASSWORD='%s'", query[0], query[1]));
             db.executeUpdate(String.format("INSERT INTO DRIVER(REGISTRATION, USERID) VALUES ('%s',%d)", query[2], userid));
+            request.getRequestDispatcher("Admin.jsp").forward(request, response);
         }
         
         
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");               //  if thet re correct you go into a welcome screen by takin your
-            out.println("<title>Welcome screen</title>");   //inputs  get from user get the person with the right inputs        
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Thank you for registering!</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }
+        
         
     }
 

@@ -51,18 +51,7 @@ public class BookJourney extends HttpServlet {
         String update = "INSERT INTO JOURNEY(ORIGIN, DESTINATION, CUSTOMERID, DEPARTURETIME, DEPARTUREDATE, DISTANCE, PRICE, PAID) VALUES ('" + origin + "','" + destination + "'," + customerID + ",TIME('" + time + "'), DATE('" + date + "')," + distance + "," + price + "," + paid + ")";  
         db.executeUpdate(update);
         
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet BookJourney</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Success!</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }
+        request.getRequestDispatcher("ChooseCustomerBooking.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

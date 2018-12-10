@@ -41,6 +41,10 @@
                     <button class="btn" type=submit" name="submit" value="Submit">Calculate</button> <!--Create button for the log in,type submit for the above form-->
                 </form>            <!--exit form  -->
 		<!-- <SELECT SUM(PRICE) FROM JOIRNEY WHERE PAID='1' AND DEPARTURETIME BETWEEN StartDate AND EndDate-->
+                <br>
+                <form method="POST" action="Admin.jsp">
+                          <button class="btn" name="button" type="submit" value="Back">Back</button>
+                </form>
             </div>
         </div>
 						

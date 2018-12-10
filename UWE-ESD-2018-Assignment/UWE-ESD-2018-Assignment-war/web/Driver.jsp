@@ -32,7 +32,7 @@
                 </form>
                 <br/>
                 <br>
-                <form method="POST" action="login.jsp">
+                <form method="POST" action="MainMenu.jsp">
                           <button class="btn" name="button" type="submit" value="Logout">Logout</button>
                 </form>
             </div>

@@ -69,41 +69,43 @@ public class ProcessBooking extends HttpServlet {
                     out.println(showError("Invalid Origin/Destination! Please try again!"));
                     }
                 }else{
-                distance = distance.replaceAll("[^\\.0123456789]","");
-                double price;
-                double numericalDistance = Double.parseDouble(distance);
-                int rate;
-                //distances based off of https://tfl.gov.uk/modes/taxis-and-minicabs/taxi-fares?intcmp=4223#on-this-page-1
-                if (numericalDistance <= 1) {
-                    rate = 3;
-                }else if(numericalDistance <= 2){
-                    rate = 4;
-                }else if(numericalDistance <= 4){
-                    rate = 5;
-                }else if(numericalDistance <= 6){
-                    rate = 6;
-                }else{
-                    rate = 7;
-                }               
-                price = numericalDistance * rate;
-                //round
-                BigDecimal bd = new BigDecimal(price);
-                bd = bd.setScale(2, RoundingMode.HALF_UP);
-                price = bd.doubleValue();
-                double vat = new BigDecimal(price * 1.20).setScale(2, RoundingMode.HALF_UP).doubleValue();
-                
-                 
-                session.setAttribute("origin", origin);
-                session.setAttribute("destination", destination);
-                session.setAttribute("date", date.toString());
-                session.setAttribute("time", time.toString());
-                session.setAttribute("customerID", customerID);
-                session.setAttribute("distance", distance);
-                session.setAttribute("price", price);
-                session.setAttribute("vat", vat);
-                
-                       
-                request.getRequestDispatcher("BookingConfirm.jsp").forward(request, response);
+                    System.out.println(distance);
+                    distance = distance.replaceAll("[^\\.0123456789]","");
+                    System.out.println(distance);
+                    double price;
+                    double numericalDistance = Double.parseDouble(distance);
+                    int rate;
+                    //distances based off of https://tfl.gov.uk/modes/taxis-and-minicabs/taxi-fares?intcmp=4223#on-this-page-1
+                    if (numericalDistance <= 1) {
+                        rate = 3;
+                    }else if(numericalDistance <= 2){
+                        rate = 4;
+                    }else if(numericalDistance <= 4){
+                        rate = 5;
+                    }else if(numericalDistance <= 5){
+                        rate = 6;
+                    }else{
+                        rate = 7;
+                    }               
+                    price = numericalDistance * rate;
+                    //round
+                    BigDecimal bd = new BigDecimal(price);
+                    bd = bd.setScale(2, RoundingMode.HALF_UP);
+                    price = bd.doubleValue();
+                    double vat = new BigDecimal(price * 1.20).setScale(2, RoundingMode.HALF_UP).doubleValue();
+
+
+                    session.setAttribute("origin", origin);
+                    session.setAttribute("destination", destination);
+                    session.setAttribute("date", date.toString());
+                    session.setAttribute("time", time.toString());
+                    session.setAttribute("customerID", customerID);
+                    session.setAttribute("distance", distance);
+                    session.setAttribute("price", price);
+                    session.setAttribute("vat", vat);
+
+
+                    request.getRequestDispatcher("BookingConfirm.jsp").forward(request, response);
                 }         
             }
         }

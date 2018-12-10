@@ -29,6 +29,7 @@
                 <form method="POST" action="Register.jsp">
                     <button name="button" type="submit" value="Register" class="btn">Register</button>
                 </form>
+                <p>${message}</p>
             </div>
         </div>
     </body>

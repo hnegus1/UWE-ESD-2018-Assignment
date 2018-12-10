@@ -13,7 +13,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import javax.xml.ws.WebServiceRef;
 import model.Database;
+import ws.AlphaCabWS_Service;
 
 /**
  *
@@ -21,6 +24,9 @@ import model.Database;
  */
 @WebServlet(name = "Turnover", urlPatterns = {"/Turnover"})
 public class CalculateTurnover extends HttpServlet {
+
+    @WebServiceRef(wsdlLocation = "WEB-INF/wsdl/localhost_8080/AlphaCabWS/AlphaCabWS.wsdl")
+    private AlphaCabWS_Service service;
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -41,23 +47,37 @@ public class CalculateTurnover extends HttpServlet {
         String qry=String.format("SELECT SUM(PRICE) FROM JOURNEY WHERE  DEPARTUREDATE BETWEEN DATE('%s') AND DATE('%s') AND PAID=1", query[0],query[1]);
         //The SUM() function returns the total sum of a numeric column. So we choose the price column from the Journey databsae
         //where the Date is between the admins choice and where they were actually paid 
-        ArrayList<ArrayList> results = db.executeQuery(qry);
+        double turnover = Double.parseDouble(String.valueOf(db.executeQuery(qry).get(0).get(0)));
+        qry=String.format("SELECT COUNT(ID) FROM JOURNEY WHERE  DEPARTUREDATE BETWEEN DATE('%s') AND DATE('%s') AND PAID=1", query[0],query[1]);
+        int numberOfJourneys = Integer.parseInt(String.valueOf(db.executeQuery(qry).get(0).get(0)));
+        String journeyTable = addList(String.format("SELECT * FROM JOURNEY WHERE DEPARTUREDATE BETWEEN DATE('%s') AND DATE('%s') AND PAID=1", query[0],query[1]), "STATIC");
         
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");               // when the admin presses calculate the new page pops
-            out.println("<title>Welcome screen</title>");   //        out with the total SUM within those dates
-            out.println("<link rel=\"stylesheet\" href=\"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css\">");
-            out.println("<link rel=\"stylesheet\" type=\"text/css\" href=\"style.css\">");
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Turnover</h1>");
-            out.println("<p>Turnover was " + results.get(0).get(0) + "</p>");
-            out.println("</body>");
-            out.println("</html>");
-        }
+        HttpSession session = request.getSession(true);
+        session.setAttribute("startDate", query[0]);
+        session.setAttribute("endDate", query[1]);
+        session.setAttribute("turnover", turnover);
+        session.setAttribute("numberOfJourneys", numberOfJourneys);
+        session.setAttribute("table", journeyTable);
+        
+        request.getRequestDispatcher("ShowReport.jsp").forward(request, response);
+        //dont do this
+        //do the other things. 
+//        try (PrintWriter out = response.getWriter()) {
+//            /* TODO output your page here. You may use following sample code. */
+//            out.println("<!DOCTYPE html>");
+//            out.println("<html>");
+//            out.println("<head>");               // when the admin presses calculate the new page pops
+//            out.println("<title>Welcome screen</title>");   //        out with the total SUM within those dates
+//            out.println("<link rel=\"stylesheet\" href=\"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css\">");
+//            out.println("<link rel=\"stylesheet\" type=\"text/css\" href=\"style.css\">");
+//            out.println("</head>");
+//            out.println("<body>");
+//            out.println("<h1>Turnover</h1>");
+//            out.println("<p>Turnover was " + turnover + "</p>");
+//            out.println("<p>Number of Journeys was " + numberOfJourneys + "</p>");
+//            out.println("</body>");
+//            out.println("</html>");
+//        }
         /// the code below no longer works BUT it was the original idea of choosing everything and adding them
 //        String qry = String.format("SELECT PRICE FROM JOURNEY WHERE PAID='1'");//slect price from journey table where they did pay
 //        ArrayList<ArrayList> results = db.executeQuery(qry);//gets the results  as an array
@@ -108,6 +128,13 @@ public class CalculateTurnover extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+
+    private String addList(java.lang.String sql, java.lang.String type) {
+        // Note that the injected javax.xml.ws.Service reference as well as port objects are not thread safe.
+        // If the calling of port operations may lead to race condition some synchronization is required.
+        ws.AlphaCabWS port = service.getAlphaCabWSPort();
+        return port.addList(sql, type);
+    }
 
 }
 

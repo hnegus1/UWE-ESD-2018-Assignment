@@ -41,6 +41,10 @@
                     <button class="btn" type=submit" name="submit" value="Submit">Submit</button> <!--Create button for the log in,type submit for the above form-->
                     <br>                   
                 </form> 
+                <br>
+                <form method="POST" action="Driver.jsp">
+                          <button class="btn" name="button" type="submit" value="Logout">Back</button>
+                </form>
             </div>
         </div>
     

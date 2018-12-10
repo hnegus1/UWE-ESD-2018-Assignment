@@ -171,7 +171,7 @@ public class AlphaCabWS {
     public String googleMapsDistance(@WebParam(name = "origin") String origin, @WebParam(name = "destination") String destination) throws ProtocolException, IOException {
         String definitelyNotAnAPIKey = "AIzaSyAi3G7IlxfDOt9xMycDOq5TKxWi5FvEhUc"; //oc do not steal 
         String url_string = "https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins=" + origin + "&destinations=" + destination +"&key=" + definitelyNotAnAPIKey;
-        url_string = url_string.replace(" ", "");
+        url_string = url_string.replace(" ", "-");
 
         URL url = new URL(url_string);
         System.out.println(url);

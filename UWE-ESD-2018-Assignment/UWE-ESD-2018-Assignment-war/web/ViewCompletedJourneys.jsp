@@ -29,6 +29,10 @@
                     ${table}
                     <button class="btn" name="button" type="submit" value="View Invoice">View Invoice</button>
                 </form>
+                
+                <form method="POST" action="ChooseCustomerBooking.jsp">
+                    <button class="btn" name="button" type="submit" value="Back">Back</button>
+                </form>
             </div>
          </div>
     </body> 

@@ -37,6 +37,10 @@
                     action="CompletedBookings.do">
                     <button class="btn" name="button" type="submit" value="Completed Journeys">Completed Journeys</button>
                 </form>
+                <br>
+                <form method="POST" action="MainMenu.jsp">
+                          <button class="btn" name="button" type="submit" value="Logout">Logout</button>
+                </form>
             </div>
         </div>
 </html>

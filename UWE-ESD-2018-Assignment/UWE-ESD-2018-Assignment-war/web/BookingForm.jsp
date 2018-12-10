@@ -47,6 +47,10 @@
                         <button class="btn" type=submit" name="submit" value="Book">Submit Booking</button> <!--Create button for the submit booking,type submit for the above form-->
                         <!-- <button type=submit" name="submit" value="Submit">Log in</button> Create button for the submit booking,type submit for the above form-->
                     </form> 
+                    <br>
+                    <form method="POST" action="ChooseCustomerBooking.jsp">
+                          <button class="btn" name="button" type="submit" value="Back">Back</button>
+                </form>
                 </div>
             </div>
     </body>

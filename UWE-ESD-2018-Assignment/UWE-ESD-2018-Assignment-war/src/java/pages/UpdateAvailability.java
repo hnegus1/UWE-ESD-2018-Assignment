@@ -76,18 +76,7 @@ public class UpdateAvailability extends HttpServlet {
             //int userid = db.getID(String.format("SELECT ID FROM USERS WHERE USERNAME='%s' AND PASSWORD='%s'", query[0], query[1]));
             //db.executeUpdate(String.format("INSERT INTO CUSTOMER(DRIVERID) VALUES (%d)", userid));
         
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet Availability</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Availability Updated" + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }
+        request.getRequestDispatcher("Driver.jsp").forward(request, response);
     
 }
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

@@ -51,6 +51,10 @@
                     <button class="btn" type="submit" value="Delete"
                             onclick="return confirm('Are you sure you want to delete this user?')">Delete</button> 
                 </form>
+                <br>
+                <form method="POST" action="Admin.jsp">
+                          <button class="btn" name="button" type="submit" value="Back">Back</button>
+                </form>
             </div>
         </div>
     </body>

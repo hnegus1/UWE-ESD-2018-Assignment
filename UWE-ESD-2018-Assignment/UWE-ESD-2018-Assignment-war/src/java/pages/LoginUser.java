@@ -14,6 +14,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -37,26 +38,17 @@ public class LoginUser extends HttpServlet {
         query[0] = (String)request.getParameter("username"); // takes the username input 
         query[1] = (String)request.getParameter("password"); /// takes the password inout
         String qry = String.format("SELECT username, password, usertype FROM USERS WHERE username='%s' AND password='%s'",query[0], query[1]);
-        
+        HttpSession session = request.getSession(true);
+        session.setMaxInactiveInterval(20 * 60);
         //check if the user name and the password are correct by taking values.. going to database and check for results
         ArrayList<ArrayList> results = db.executeQuery(qry);//gets the results 
         if (results.isEmpty()) { // if they re empty Or wrong you will go into a fail log in page
-            try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");          
-            out.println("<head>");
-            out.println("<title>Connection error screen</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Incorrect username/password!" + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-            }
+            session.setAttribute("message", "Invalid Username or Password.");
+            request.getRequestDispatcher("MainMenu.jsp").forward(request, response);
         } else {
             String userName = new String();
             userName = "" + results.get(0).get(0);
-            
+            session.setAttribute("message", "");
             int userid = db.getID(String.format("SELECT ID FROM USERS WHERE USERNAME='%s' AND PASSWORD='%s'", query[0], query[1]));
             Cookie loginCookie = new Cookie("user", String.valueOf(userid));
             response.addCookie(loginCookie);

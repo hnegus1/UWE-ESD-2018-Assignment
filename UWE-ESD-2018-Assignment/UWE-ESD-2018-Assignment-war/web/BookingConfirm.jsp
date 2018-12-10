@@ -36,12 +36,11 @@
                         <input type="hidden" name="date" value="${date}">
                         <input type="hidden" name="time" value="${time}">
                         <input type="hidden" name="customerID" value="${customerID}">
-                        <input type="submit" value="Confirm"/>
+                        <button class="btn" type="submit" value="Confirm">Confirm</button>
                 </form>
                 <br>
-                <form method="POST"
-                      action="ChooseCustomerBooking.jsp">
-                          <input name="button" type="submit" value="Go Back"/>
+                <form method="POST" action="ChooseCustomerBooking.jsp">
+                    <button class="btn" name="button" type="submit" value="Go Back">Back</button>
             </div>
         </div>
         </form>
