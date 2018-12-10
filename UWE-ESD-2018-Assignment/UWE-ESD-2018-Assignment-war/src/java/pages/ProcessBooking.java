@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -69,6 +70,8 @@ public class ProcessBooking extends HttpServlet {
                     out.println(showError("Invalid Origin/Destination! Please try again!"));
                     }
                 }else{
+                    ArrayList<ArrayList> results = db.executeQuery("SELECT * FROM PRICE");
+                    double fee = Double.parseDouble((String) results.get(0).get(2));
                     System.out.println(distance);
                     distance = distance.replaceAll("[^\\.0123456789]","");
                     System.out.println(distance);
@@ -78,16 +81,20 @@ public class ProcessBooking extends HttpServlet {
                     //distances based off of https://tfl.gov.uk/modes/taxis-and-minicabs/taxi-fares?intcmp=4223#on-this-page-1
                     if (numericalDistance <= 1) {
                         rate = 3;
+                        price = (numericalDistance * rate) + fee;
                     }else if(numericalDistance <= 2){
                         rate = 4;
+                        price = (numericalDistance * rate) + fee;
                     }else if(numericalDistance <= 4){
                         rate = 5;
+                        price = (numericalDistance * rate) + fee;
                     }else if(numericalDistance <= 5){
                         rate = 6;
+                        price = (numericalDistance * rate) + fee;
                     }else{
                         rate = 7;
+                        price = numericalDistance * rate;
                     }               
-                    price = numericalDistance * rate;
                     //round
                     BigDecimal bd = new BigDecimal(price);
                     bd = bd.setScale(2, RoundingMode.HALF_UP);

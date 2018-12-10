@@ -17,7 +17,7 @@
         <nav class="navbar navbar-static-top">
             <div class="container">
                 <div class="row" style="text-align: center">
-                    <h1>Welcome ${name}</h1>
+                    <h1>Welcome Administrator</h1>
                 </div>
             </div>
         </nav> 
@@ -43,6 +43,10 @@
                           <button class="btn"  name="button" type="submit" value="CalculateTurnOver">Calculate Turnover</button>
                 </form>
                 <br>
+                <form method="POST"
+                    action="EditFee.jsp">
+                          <button class="btn"  name="button" type="submit" value="CalculateTurnOver">Edit Fee</button>
+                </form>
                 <br>
                 <form method="POST"
                       action="MainMenu.jsp">

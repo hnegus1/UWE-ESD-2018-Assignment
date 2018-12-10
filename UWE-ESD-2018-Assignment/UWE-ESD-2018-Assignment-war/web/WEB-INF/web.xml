@@ -92,6 +92,10 @@
         <servlet-name>DisplayInvoice</servlet-name>
         <servlet-class>pages.DisplayInvoice</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>EditFee</servlet-name>
+        <servlet-class>pages.EditFee</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>StartUp</servlet-name>
         <url-pattern>/MainMenu</url-pattern>
@@ -183,6 +187,10 @@
     <servlet-mapping>
         <servlet-name>DisplayInvoice</servlet-name>
         <url-pattern>/DisplayInvoice.do</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditFee</servlet-name>
+        <url-pattern>/EditFee.do</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
